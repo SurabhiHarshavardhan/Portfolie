@@ -1,183 +1,122 @@
 import React from 'react';
-import { 
-  Cpu, 
-  Wifi, 
-  Brain, 
-  Bot, 
-  Target, 
-  Compass, 
-  Zap, 
-  CheckCircle,
-  MapPin,
-  GraduationCap,
-  Award,
-  ShieldCheck,
-  QrCode
-} from 'lucide-react';
-import { portfolioData } from '../data/portfolioData';
+import { MapPin, GraduationCap, Languages, Zap } from 'lucide-react';
 import profilePhoto from '../image/Harshavardhan.jpeg';
 
-export default function About() {
-  const { personal, areasOfInterest } = portfolioData;
+const interests = [
+  { title: 'Internet of Things (IoT)', desc: 'Smart sensor networks, MQTT protocols, edge analytics, and cloud data pipelines.' },
+  { title: 'Embedded Systems', desc: 'Microcontroller architecture, sensor interfacing, and low-level C programming.' },
+  { title: 'Robotics & Automation', desc: 'Sensor fusion, motor actuation, and autonomous navigation algorithms.' },
+  { title: 'AI & Medical Imaging', desc: 'CNN/RNN models for clinical microscopy and automated disease diagnostics.' },
+];
 
-  const iconMap = {
-    Wifi: Wifi,
-    CircuitBoard: Cpu,
-    Bot: Bot,
-    Brain: Brain
-  };
-
+function SectionHeader({ eyebrow, title, subtitle }) {
   return (
-    <section id="about" className="py-20 relative bg-slate-950/60 border-t border-b border-slate-800/80 no-scrollbar">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-xs font-mono text-cyan-400">
-            <Compass className="w-3.5 h-3.5" />
-            <span>DISCOVER MY PROFILE</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Engineering Background & Philosophy
-          </h2>
-          <p className="text-sm sm:text-base text-slate-400 font-mono">
-            Bridging low-level embedded hardware and high-level artificial intelligence
-          </p>
-        </div>
+    <div className="mb-14 reveal">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-6 h-px" style={{ background: '#c9a84c' }} />
+        <span className="font-body text-xs tracking-widest uppercase" style={{ color: '#c9a84c', letterSpacing: '0.2em' }}>
+          {eyebrow}
+        </span>
+      </div>
+      <h2 className="font-display text-3xl sm:text-4xl font-bold mb-3" style={{ color: '#e8e0d4' }}>
+        {title}
+      </h2>
+      {subtitle && (
+        <p className="font-elegant text-lg italic" style={{ color: 'rgba(232,224,212,0.5)' }}>
+          {subtitle}
+        </p>
+      )}
+      <div className="mt-5 divider" style={{ maxWidth: '80px' }} />
+    </div>
+  );
+}
 
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* Left Column: Detailed Bio & Core Pillars */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl pointer-events-none" />
-              
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2 font-mono">
-                <Target className="w-5 h-5 text-cyan-400" />
-                <span>Professional Summary</span>
-              </h3>
+export default function About() {
+  return (
+    <section id="about" className="py-24 sm:py-32" style={{ background: '#0f0f0f' }}>
+      <div className="max-w-6xl mx-auto px-6 sm:px-10">
+        <SectionHeader
+          eyebrow="Who I Am"
+          title="About Me"
+          subtitle="Engineering intelligence, one circuit at a time"
+        />
 
-              <div className="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed">
-                <p>
-                  I am <strong className="text-cyan-300 font-semibold">{personal.fullName}</strong>, an 
-                  Electronics and Communication Engineering graduate with robust fundamentals in digital electronics, 
-                  signal processing, and embedded systems architecture.
-                </p>
-                <p>
-                  Proficient in <strong className="text-white">C and Python programming</strong>, I bring hands-on 
-                  practical knowledge of IoT and embedded application development gained through rigorous academic research 
-                  and autonomous hardware-software projects.
-                </p>
-                <p>
-                  I am deeply passionate about architecting <span className="text-teal-300 font-medium">efficient hardware-software integrated solutions</span> and 
-                  translating theoretical engineering concepts into real-world applications—from AI-driven medical parasite 
-                  detection to autonomous court robotics.
-                </p>
-              </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
-              {/* Quick Info Matrix */}
-              <div className="mt-6 pt-6 border-t border-slate-800 grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs font-mono">
-                <div className="flex items-center gap-2.5 text-slate-300">
-                  <GraduationCap className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                  <span>Saveetha School of Engg (2022–2026)</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-slate-300">
-                  <MapPin className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                  <span>Chennai, TN & Tirupathi, AP</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-slate-300">
-                  <Zap className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                  <span>Hardware + Machine Learning Focus</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-slate-300">
-                  <CheckCircle className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                  <span>B.Tech CGPA: 7.38 / 10.0</span>
-                </div>
-              </div>
-
+          {/* Bio Column */}
+          <div className="lg:col-span-7 space-y-8">
+            <div className="reveal space-y-5">
+              <p className="font-body text-base leading-relaxed" style={{ color: 'rgba(232,224,212,0.7)', lineHeight: '1.9' }}>
+                I am <strong style={{ color: '#e8e0d4' }}>Surabhi Kamesh Sri Surya Harshavardhan</strong>, an Electronics and Communication Engineering graduate from Saveetha School of Engineering, Chennai. My academic journey has equipped me with deep expertise in digital electronics, signal processing, and embedded system design.
+              </p>
+              <p className="font-body text-base leading-relaxed" style={{ color: 'rgba(232,224,212,0.7)', lineHeight: '1.9' }}>
+                Proficient in <span style={{ color: '#c9a84c' }}>C and Python</span>, I have channelled my skills into building real-world applications — from AI-powered malaria diagnostic systems achieving <span style={{ color: '#c9a84c' }}>96.4% classification accuracy</span> to autonomous tennis ball-collecting robots that merge embedded hardware with intelligent control.
+              </p>
+              <p className="font-body text-base leading-relaxed" style={{ color: 'rgba(232,224,212,0.7)', lineHeight: '1.9' }}>
+                I am passionate about architecting elegant hardware–software integrated solutions and eager to contribute to growth-oriented organisations pushing the frontier of engineering.
+              </p>
             </div>
 
-            {/* Core Mission Banner */}
-            <div className="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900/60 to-blue-950/40 border border-cyan-500/20 text-slate-300 text-sm">
-              <span className="font-mono text-cyan-400 font-semibold uppercase text-xs tracking-wider block mb-1">
-                Career Objective
-              </span>
-              Eager to apply technical skills in embedded systems and machine learning, continuously learn evolving technologies, and contribute meaningfully to high-impact engineering projects within a growth-oriented organization.
-            </div>
-          </div>
-
-          {/* Right Column: Engineering ID Badge & Areas of Interest */}
-          <div className="lg:col-span-5 space-y-5">
-            
-            {/* High-Tech Engineer ID Card */}
-            <div className="glass-panel p-5 rounded-2xl border border-cyan-500/30 bg-gradient-to-b from-slate-900/90 to-slate-950/95 relative overflow-hidden group">
-              <div className="flex items-center gap-4">
-                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border-2 border-cyan-400/80 flex-shrink-0 shadow-lg shadow-cyan-500/20">
-                  <img
-                    src={profilePhoto}
-                    alt="Harshavardhan"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <span className="absolute bottom-1 right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-slate-900"></span>
-                </div>
-                <div className="space-y-1 font-mono">
-                  <span className="text-[10px] text-cyan-400 uppercase tracking-widest font-bold block">
-                    ENGINEER CREDENTIAL
-                  </span>
-                  <h4 className="text-sm sm:text-base font-bold text-white leading-tight">
-                    Surabhi Harshavardhan
-                  </h4>
-                  <p className="text-[11px] text-slate-400">
-                    B.Tech ECE • Saveetha University
-                  </p>
-                  <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 text-[10px]">
-                    <ShieldCheck className="w-3 h-3" />
-                    <span>CGPA 7.38 / 10.0</span>
+            {/* Quick Facts Grid */}
+            <div className="reveal delay-200 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                { icon: GraduationCap, label: 'Institution', val: 'Saveetha School of Engineering' },
+                { icon: MapPin, label: 'Location', val: 'Chennai, TN & Tirupathi, AP' },
+                { icon: Zap, label: 'Focus Area', val: 'Hardware + AI Integration' },
+                { icon: Languages, label: 'Languages', val: 'Telugu, English, Hindi, Tamil' },
+              ].map(({ icon: Icon, label, val }) => (
+                <div
+                  key={label}
+                  className="flex items-start gap-3 p-4 rounded-sm card-glow"
+                  style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.06)' }}
+                >
+                  <Icon size={15} style={{ color: '#c9a84c', marginTop: 2, flexShrink: 0 }} />
+                  <div>
+                    <p className="font-body text-xs uppercase tracking-wider mb-1" style={{ color: 'rgba(201,168,76,0.6)', letterSpacing: '0.1em' }}>{label}</p>
+                    <p className="font-body text-sm" style={{ color: 'rgba(232,224,212,0.8)' }}>{val}</p>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
 
-            {/* Areas of Interest Cards */}
-            <div className="space-y-3">
-              <h3 className="text-sm font-bold text-white font-mono flex items-center gap-2">
-                <Cpu className="w-4 h-4 text-cyan-400" />
-                <span>Areas of Interest & Specialization</span>
-              </h3>
-
-              <div className="grid grid-cols-1 gap-3">
-                {areasOfInterest.map((item, idx) => {
-                  const IconComponent = iconMap[item.icon] || Cpu;
-                  return (
-                    <div
-                      key={idx}
-                      className="glass-panel-interactive p-4 rounded-xl border border-slate-800 hover:border-cyan-500/40 transition-all duration-300 group"
-                    >
-                      <div className="flex items-start gap-3">
-                        <div className="p-2 rounded-lg bg-cyan-950/70 border border-cyan-500/30 text-cyan-400 group-hover:scale-105 group-hover:bg-cyan-500/20 transition-all">
-                          <IconComponent className="w-4 h-4" />
-                        </div>
-                        <div className="space-y-0.5">
-                          <h4 className="text-xs sm:text-sm font-semibold text-white group-hover:text-cyan-300 transition-colors font-mono">
-                            {item.title}
-                          </h4>
-                          <p className="text-[11px] sm:text-xs text-slate-400 leading-relaxed">
-                            {item.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+            {/* Career objective */}
+            <div
+              className="reveal delay-300 p-5 rounded-sm"
+              style={{
+                background: 'rgba(201,168,76,0.05)',
+                borderLeft: '2px solid rgba(201,168,76,0.4)',
+              }}
+            >
+              <p className="font-elegant text-base italic" style={{ color: 'rgba(232,224,212,0.65)', lineHeight: '1.8' }}>
+                "Eager to apply technical skills in embedded systems and machine learning, continuously learn evolving technologies, and contribute meaningfully to high-impact engineering projects."
+              </p>
             </div>
+          </div>
 
+          {/* Interests Column */}
+          <div className="lg:col-span-5 space-y-4">
+            <h3 className="reveal font-body text-xs tracking-widest uppercase mb-6" style={{ color: 'rgba(201,168,76,0.7)', letterSpacing: '0.15em' }}>
+              Areas of Specialisation
+            </h3>
+            {interests.map((item, i) => (
+              <div
+                key={item.title}
+                className={`reveal delay-${(i + 1) * 100} hover-lift card-glow p-5 rounded-sm cursor-default`}
+                style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.06)' }}
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#c9a84c' }} />
+                  <h4 className="font-body text-sm font-semibold" style={{ color: '#e8e0d4' }}>{item.title}</h4>
+                </div>
+                <p className="font-body text-xs leading-relaxed pl-4" style={{ color: 'rgba(232,224,212,0.5)', lineHeight: '1.7' }}>{item.desc}</p>
+              </div>
+            ))}
           </div>
 
         </div>
-
       </div>
     </section>
   );
 }
+
+export { SectionHeader };

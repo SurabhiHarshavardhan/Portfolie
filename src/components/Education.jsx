@@ -1,123 +1,136 @@
 import React from 'react';
-import { 
-  GraduationCap, 
-  Calendar, 
-  MapPin, 
-  Award, 
-  CheckCircle2, 
-  BookOpen, 
-  Compass,
-  Star
-} from 'lucide-react';
-import { portfolioData } from '../data/portfolioData';
+import { SectionHeader } from './About';
+
+const edu = [
+  {
+    period: '2022 – 2026',
+    institution: 'Saveetha School of Engineering',
+    location: 'Chennai, Tamil Nadu',
+    degree: 'Bachelor of Technology in Electronics and Communication Engineering',
+    grade: 'CGPA: 7.38 / 10.0',
+    color: '#c9a84c',
+    highlights: [
+      'Core coursework in Digital Electronics, Signals & Systems, Microprocessors & Microcontrollers',
+      'Research in Deep Learning for medical parasite classification (CNN vs. SVM, RNN vs. CNN)',
+      'Developed an AI-integrated autonomous tennis ball collector robot',
+    ],
+  },
+  {
+    period: '2020 – 2022',
+    institution: 'Viswasai Junior College',
+    location: 'Tirupathi, Andhra Pradesh',
+    degree: 'Intermediate Education (MPC — Mathematics, Physics, Chemistry)',
+    grade: 'Percentage: 51%',
+    color: 'rgba(201,168,76,0.5)',
+    highlights: [
+      'Foundation in Calculus, Electromagnetism, Analytical Mechanics, and Chemistry',
+      'Developed analytical problem-solving and mathematical rigour',
+    ],
+  },
+  {
+    period: '2019 – 2020',
+    institution: 'Model Academy EM School',
+    location: 'Renigunta, Andhra Pradesh',
+    degree: 'Secondary School Certificate (SSC / 10th Standard)',
+    grade: 'Percentage: 85%',
+    color: 'rgba(201,168,76,0.3)',
+    highlights: [
+      'Distinction achievement with 85% overall score',
+      'Active participation in science exhibitions and mathematics competitions',
+    ],
+  },
+];
 
 export default function Education() {
-  const { education } = portfolioData;
-
   return (
-    <section id="education" className="py-20 relative circuit-grid no-scrollbar">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-xs font-mono text-cyan-400">
-            <GraduationCap className="w-3.5 h-3.5" />
-            <span>ACADEMIC FOUNDATION</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Education & Qualifications
-          </h2>
-          <p className="text-sm sm:text-base text-slate-400 font-mono">
-            Structured progression through rigorous engineering and analytical disciplines
-          </p>
-        </div>
+    <section id="education" className="py-24 sm:py-32" style={{ background: '#0d0d0d' }}>
+      <div className="max-w-6xl mx-auto px-6 sm:px-10">
+        <SectionHeader
+          eyebrow="Background"
+          title="Education"
+          subtitle="A structured path through engineering and analytical disciplines"
+        />
 
-        {/* Timeline Container */}
-        <div className="max-w-4xl mx-auto relative">
-          
-          {/* Vertical Connecting Line */}
-          <div className="absolute left-4 sm:left-1/2 top-4 bottom-4 w-0.5 bg-gradient-to-b from-cyan-500 via-teal-500 to-slate-800 -translate-x-1/2 hidden sm:block" />
+        <div className="relative">
+          {/* Vertical timeline line */}
+          <div
+            className="absolute left-5 sm:left-6 top-2 bottom-2 w-px hidden sm:block"
+            style={{ background: 'linear-gradient(to bottom, rgba(201,168,76,0.4), rgba(201,168,76,0.05))' }}
+          />
 
-          <div className="space-y-12">
-            {education.map((item, index) => {
-              const isEven = index % 2 === 0;
+          <div className="space-y-10 sm:space-y-12">
+            {edu.map((item, i) => (
+              <div
+                key={item.institution}
+                className={`reveal delay-${(i + 1) * 100} flex flex-col sm:flex-row gap-6 sm:gap-10`}
+              >
+                {/* Timeline dot */}
+                <div className="flex-shrink-0 hidden sm:flex flex-col items-center">
+                  <div
+                    className="w-3 h-3 rounded-full mt-2 relative z-10"
+                    style={{ background: item.color, boxShadow: `0 0 12px ${item.color}` }}
+                  />
+                </div>
 
-              return (
+                {/* Card */}
                 <div
-                  key={index}
-                  className={`relative flex flex-col sm:flex-row items-center gap-8 ${
-                    isEven ? 'sm:flex-row-reverse' : ''
-                  }`}
+                  className="flex-1 hover-lift card-glow p-6 sm:p-7 rounded-sm"
+                  style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.07)' }}
                 >
-                  {/* Timeline Center Node */}
-                  <div className="absolute left-4 sm:left-1/2 -translate-x-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-slate-900 border-2 border-cyan-400 z-10 shadow-lg shadow-cyan-500/30">
-                    <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping" />
-                  </div>
-
-                  {/* Empty Spacer on other side */}
-                  <div className="hidden sm:block sm:w-1/2" />
-
-                  {/* Card on active side */}
-                  <div className="w-full sm:w-1/2 pl-12 sm:pl-0">
-                    <div className="glass-panel p-6 sm:p-7 rounded-2xl border border-slate-800 hover:border-cyan-500/40 hover:shadow-xl hover:shadow-cyan-500/5 transition-all">
-                      
-                      {/* Top Badges */}
-                      <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                        <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-cyan-950/80 text-cyan-300 border border-cyan-500/30">
-                          {item.badge}
-                        </span>
-                        <div className="flex items-center gap-1.5 text-xs font-mono text-slate-400">
-                          <Calendar className="w-3.5 h-3.5 text-cyan-400" />
-                          <span>{item.period}</span>
-                        </div>
-                      </div>
-
-                      {/* Degree / Title */}
-                      <h3 className="text-lg font-bold text-white mb-1 leading-snug">
-                        {item.degree}
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
+                    <div>
+                      <span
+                        className="font-body text-xs tracking-widest uppercase"
+                        style={{ color: item.color, letterSpacing: '0.15em' }}
+                      >
+                        {item.period}
+                      </span>
+                      <h3
+                        className="font-display text-xl font-bold mt-1"
+                        style={{ color: '#e8e0d4' }}
+                      >
+                        {item.institution}
                       </h3>
-
-                      {/* Institution & Location */}
-                      <div className="space-y-1 mb-4 text-xs font-mono">
-                        <div className="text-cyan-400 font-semibold flex items-center gap-1.5">
-                          <BookOpen className="w-3.5 h-3.5" />
-                          <span>{item.institution}</span>
-                        </div>
-                        <div className="text-slate-400 flex items-center gap-1.5">
-                          <MapPin className="w-3.5 h-3.5 text-slate-500" />
-                          <span>{item.location}</span>
-                        </div>
-                      </div>
-
-                      {/* Score Chip */}
-                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs font-mono mb-4">
-                        <Award className="w-4 h-4 text-emerald-400" />
-                        <span className="text-slate-400">Score / Grade:</span>
-                        <span className="text-emerald-400 font-bold">{item.score}</span>
-                      </div>
-
-                      {/* Highlights */}
-                      <div className="space-y-2 border-t border-slate-800/80 pt-3">
-                        {item.highlights.map((point, pIdx) => (
-                          <div key={pIdx} className="flex items-start gap-2 text-xs text-slate-300 leading-relaxed">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400/80 flex-shrink-0 mt-0.5" />
-                            <span>{point}</span>
-                          </div>
-                        ))}
-                      </div>
-
+                      <p className="font-body text-sm" style={{ color: 'rgba(232,224,212,0.45)' }}>
+                        {item.location}
+                      </p>
+                    </div>
+                    <div className="text-left sm:text-right">
+                      <span
+                        className="font-display text-lg font-bold"
+                        style={{ color: '#c9a84c' }}
+                      >
+                        {item.grade}
+                      </span>
                     </div>
                   </div>
 
+                  <p
+                    className="font-elegant text-base italic mb-4"
+                    style={{ color: 'rgba(232,224,212,0.5)' }}
+                  >
+                    {item.degree}
+                  </p>
+
+                  <div className="space-y-2">
+                    {item.highlights.map((h) => (
+                      <div key={h} className="flex items-start gap-3">
+                        <div
+                          className="w-1 h-1 rounded-full mt-2 flex-shrink-0"
+                          style={{ background: item.color }}
+                        />
+                        <span className="font-body text-xs leading-relaxed" style={{ color: 'rgba(232,224,212,0.5)', lineHeight: '1.7' }}>
+                          {h}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
-
         </div>
-
       </div>
     </section>
   );
 }
-

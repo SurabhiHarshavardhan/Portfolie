@@ -1,342 +1,243 @@
 import React, { useState } from 'react';
-import { 
-  FolderGit2, 
-  ExternalLink, 
-  Cpu, 
-  Brain, 
-  Bot, 
-  CheckCircle2, 
-  Play, 
-  Activity, 
-  ShieldCheck, 
-  BarChart3, 
-  Layers, 
-  ArrowUpRight,
-  Maximize2
-} from 'lucide-react';
-import { portfolioData } from '../data/portfolioData';
+import { ArrowRight, X } from 'lucide-react';
+import { SectionHeader } from './About';
 
-export default function Projects({ onSelectProject }) {
-  const { projects } = portfolioData;
-  const [activeDemos, setActiveDemos] = useState({});
+const projects = [
+  {
+    num: '01',
+    title: 'Malaria Parasite Categorization',
+    subtitle: 'CNN vs. Support Vector Machines',
+    category: 'Medical AI & Computer Vision',
+    tags: ['Deep Learning', 'CNN', 'SVM', 'Python', 'TensorFlow', 'Medical Imaging'],
+    metric: '96.4%',
+    metricLabel: 'CNN Accuracy',
+    desc: 'Developed a novel machine learning diagnostic framework to classify malaria parasites from microscopic blood cell images. Performed rigorous comparative evaluation of Deep Convolutional Neural Networks against Support Vector Machines, achieving a +7.3% accuracy improvement with CNN and 97.1% sensitivity — directly reducing false-negative clinical diagnoses.',
+    highlights: [
+      'End-to-end image preprocessing pipeline for RBC slide segmentation',
+      'Custom Conv-Pool-Dense CNN architecture with Dropout regularisation',
+      'SVM baseline with RBF kernel and handcrafted texture/colour features',
+      '97.1% sensitivity in detecting infected erythrocytes',
+      '42ms average inference time per sample',
+    ],
+    stack: 'Python · TensorFlow · Keras · Scikit-learn · OpenCV · NumPy · Matplotlib',
+  },
+  {
+    num: '02',
+    title: 'Typhoid Parasite Detection',
+    subtitle: 'RNN vs. Deep CNN Comparative Study',
+    category: 'Deep Learning & Healthcare Analytics',
+    tags: ['RNN', 'CNN', 'Python', 'Healthcare', 'Sequential Analysis'],
+    metric: '95.1%',
+    metricLabel: 'Model Accuracy',
+    desc: 'Explored and contrasted Recurrent Neural Networks (RNN) and Convolutional Neural Networks (CNN) for typhoid-related medical data analysis. Investigated how spatial feature extraction compares against sequential temporal patient biomarker dynamics, with key insights into hybrid CNN-RNN architectures for comprehensive multi-modal diagnostics.',
+    highlights: [
+      'Structured evaluation framework: spatial (CNN) vs. sequential (RNN)',
+      'Patient biomarker trend preprocessing and augmentation',
+      'Precision, recall, F1-score, and ROC-AUC analysis across both models',
+      'Insights into hybrid CNN-RNN pipelines for multi-modal diagnostics',
+      'Early detection capability to reduce diagnostic turnaround time',
+    ],
+    stack: 'Python · TensorFlow · Keras · Pandas · NumPy · Matplotlib',
+  },
+  {
+    num: '03',
+    title: 'AI-Integrated Tennis Ball Collector Robot',
+    subtitle: 'Autonomous Embedded Robotic System',
+    category: 'Robotics, Embedded IoT & AI',
+    tags: ['Robotics', 'Embedded Systems', 'IoT', 'C/C++', 'Python', 'Sensors', 'Autonomous'],
+    metric: '92%',
+    metricLabel: 'Collection Rate',
+    desc: 'Designed and built an autonomous AI-integrated robotic rover for tennis court ball retrieval. Combines computer vision-based ball detection, embedded C microcontroller firmware for precise motor control, an ultrasonic obstacle avoidance system, and a mechanical roller intake mechanism — eliminating manual collection effort.',
+    highlights: [
+      'Ultrasonic HC-SR04 + IR proximity sensor fusion for environment awareness',
+      'Embedded C/C++ firmware with PWM differential motor steering',
+      'Mechanical rotating roller intake and ball hopper storage system',
+      'AI-guided pathfinding to nearest detected tennis ball',
+      'IoT telemetry: battery status, ball count, and diagnostic logs',
+    ],
+    stack: 'C / C++ · Python · Microcontroller · HC-SR04 · IR Sensors · DC Motors · Li-Ion Power',
+  },
+];
 
-  // Malaria interactive simulation state
-  const [malariaResult, setMalariaResult] = useState({
-    cnnConfidence: 96.8,
-    svmConfidence: 88.4,
-    status: 'Parasitized (Plasmodium Detected)',
-    latency: '38ms'
-  });
-
-  // Typhoid interactive simulation state
-  const [typhoidMetric, setTyphoidMetric] = useState('cnn');
-
-  // Tennis Robot interactive simulation state
-  const [robotStatus, setRobotStatus] = useState({
-    active: true,
-    ballsCollected: 8,
-    distanceToBall: 0.65, // meters
-    motorSpeed: '75%',
-    intakeActive: true
-  });
-
-  const triggerMalariaSample = () => {
-    const isParasite = Math.random() > 0.3;
-    setMalariaResult({
-      cnnConfidence: (94 + Math.random() * 5).toFixed(1),
-      svmConfidence: (84 + Math.random() * 6).toFixed(1),
-      status: isParasite ? 'Parasitized (Infected Erythrocyte)' : 'Uninfected (Healthy Cell)',
-      latency: `${Math.floor(32 + Math.random() * 15)}ms`
-    });
-  };
-
-  const collectTennisBall = () => {
-    setRobotStatus((prev) => ({
-      ...prev,
-      ballsCollected: prev.ballsCollected + 1,
-      distanceToBall: (Math.random() * 1.5 + 0.3).toFixed(2)
-    }));
-  };
-
+function ProjectModal({ project, onClose }) {
+  if (!project) return null;
   return (
-    <section id="projects" className="py-20 relative bg-slate-950/70 border-t border-b border-slate-800 no-scrollbar">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-xs font-mono text-cyan-400">
-            <FolderGit2 className="w-3.5 h-3.5" />
-            <span>ENGINEERING PORTFOLIO</span>
+    <div
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6"
+      style={{ background: 'rgba(0,0,0,0.85)' }}
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full sm:max-w-2xl max-h-[90vh] overflow-y-auto rounded-t-2xl sm:rounded-sm"
+        style={{ background: '#141414', border: '1px solid rgba(201,168,76,0.2)' }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-start justify-between p-6 sm:p-8 border-b" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
+          <div>
+            <span className="font-body text-xs tracking-widest uppercase" style={{ color: '#c9a84c', letterSpacing: '0.15em' }}>
+              {project.category}
+            </span>
+            <h3 className="font-display text-xl sm:text-2xl font-bold mt-1" style={{ color: '#e8e0d4' }}>{project.title}</h3>
+            <p className="font-elegant text-base italic mt-0.5" style={{ color: 'rgba(232,224,212,0.5)' }}>{project.subtitle}</p>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Featured Research & Engineering Projects
-          </h2>
-          <p className="text-sm sm:text-base text-slate-400 font-mono">
-            Rigorous comparative deep learning studies and integrated autonomous hardware systems
+          <button onClick={onClose} className="p-2 ml-4 flex-shrink-0 transition-colors" style={{ color: 'rgba(232,224,212,0.4)' }}>
+            <X size={20} />
+          </button>
+        </div>
+
+        {/* Body */}
+        <div className="p-6 sm:p-8 space-y-7">
+          {/* Metric */}
+          <div className="flex items-center gap-6">
+            <div>
+              <p className="font-display text-4xl font-bold gold-text">{project.metric}</p>
+              <p className="font-body text-xs" style={{ color: 'rgba(201,168,76,0.6)' }}>{project.metricLabel}</p>
+            </div>
+            <div className="divider flex-1" />
+          </div>
+
+          {/* Description */}
+          <p className="font-body text-sm leading-relaxed" style={{ color: 'rgba(232,224,212,0.65)', lineHeight: '1.9' }}>
+            {project.desc}
           </p>
-        </div>
 
-        {/* Projects List */}
-        <div className="space-y-12">
-          {projects.map((project, index) => {
-            return (
-              <div
-                key={project.id}
-                className="glass-panel rounded-2xl border border-slate-800 hover:border-cyan-500/40 transition-all duration-300 overflow-hidden shadow-xl"
+          {/* Key Highlights */}
+          <div>
+            <h4 className="font-body text-xs tracking-widest uppercase mb-4" style={{ color: 'rgba(201,168,76,0.6)', letterSpacing: '0.15em' }}>
+              Key Highlights
+            </h4>
+            <ul className="space-y-2.5">
+              {project.highlights.map((h) => (
+                <li key={h} className="flex items-start gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ background: '#c9a84c' }} />
+                  <span className="font-body text-sm" style={{ color: 'rgba(232,224,212,0.65)' }}>{h}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Tech Stack */}
+          <div
+            className="p-4 rounded-sm"
+            style={{ background: 'rgba(201,168,76,0.05)', borderLeft: '2px solid rgba(201,168,76,0.3)' }}
+          >
+            <p className="font-body text-xs tracking-widest uppercase mb-1.5" style={{ color: 'rgba(201,168,76,0.5)', letterSpacing: '0.12em' }}>Stack</p>
+            <p className="font-body text-sm" style={{ color: 'rgba(232,224,212,0.7)' }}>{project.stack}</p>
+          </div>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2">
+            {project.tags.map((t) => (
+              <span
+                key={t}
+                className="font-body text-xs px-3 py-1 rounded-sm"
+                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(232,224,212,0.5)' }}
               >
-                <div className="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                  
-                  {/* Left Column: Project Overview & Specs */}
-                  <div className="lg:col-span-7 space-y-5">
-                    
-                    {/* Top badges */}
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="px-3 py-1 rounded-full text-xs font-mono font-medium bg-cyan-950/80 text-cyan-400 border border-cyan-500/30">
-                        {project.category}
-                      </span>
-                      <span className="px-2.5 py-1 rounded-full text-xs font-mono bg-slate-900 text-slate-300 border border-slate-700">
-                        PROJECT #{index + 1}
-                      </span>
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="text-xl sm:text-2xl font-bold text-white hover:text-cyan-300 transition-colors">
-                      {project.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                      {project.overview}
-                    </p>
-
-                    {/* Key Highlights Bullet Points */}
-                    <div className="space-y-2 pt-1">
-                      {project.keyFeatures.slice(0, 3).map((feat, fIdx) => (
-                        <div key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                          <span>{feat}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Tech Tags */}
-                    <div className="flex flex-wrap gap-1.5 pt-2">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2.5 py-1 rounded bg-slate-900 border border-slate-700/80 text-xs font-mono text-cyan-300"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Action buttons */}
-                    <div className="flex flex-wrap gap-3 pt-3">
-                      <button
-                        onClick={() => onSelectProject(project)}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 hover:border-cyan-300 text-xs font-mono font-semibold transition-all shadow-sm"
-                      >
-                        <Maximize2 className="w-3.5 h-3.5" />
-                        <span>Full Architectural Deep Dive</span>
-                      </button>
-                    </div>
-
-                  </div>
-
-                  {/* Right Column: Live Interactive Benchmarking / Telemetry Widget */}
-                  <div className="lg:col-span-5">
-                    
-                    {/* Malaria Interactive Diagnostic Panel */}
-                    {project.demoType === 'cnn-vs-svm' && (
-                      <div className="bg-slate-900/90 rounded-xl p-5 border border-cyan-500/30 space-y-4 font-mono text-xs shadow-inner">
-                        <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-                          <span className="text-cyan-400 font-bold flex items-center gap-2">
-                            <Brain className="w-4 h-4 text-cyan-400" />
-                            LIVE MODEL BENCHMARK
-                          </span>
-                          <span className="text-[11px] text-slate-400">CNN vs SVM</span>
-                        </div>
-
-                        {/* Model comparison bars */}
-                        <div className="space-y-3">
-                          <div>
-                            <div className="flex justify-between text-slate-300 mb-1">
-                              <span className="font-semibold text-cyan-300">Deep CNN (Conv-Pool-Dense)</span>
-                              <span className="text-cyan-400 font-bold">{malariaResult.cnnConfidence}% Conf</span>
-                            </div>
-                            <div className="w-full bg-slate-950 rounded-full h-2 overflow-hidden border border-slate-800">
-                              <div
-                                className="bg-gradient-to-r from-cyan-500 to-blue-500 h-2 rounded-full transition-all duration-500"
-                                style={{ width: `${malariaResult.cnnConfidence}%` }}
-                              />
-                            </div>
-                          </div>
-
-                          <div>
-                            <div className="flex justify-between text-slate-300 mb-1">
-                              <span className="font-semibold text-purple-300">SVM (RBF Kernel)</span>
-                              <span className="text-purple-400 font-bold">{malariaResult.svmConfidence}% Conf</span>
-                            </div>
-                            <div className="w-full bg-slate-950 rounded-full h-2 overflow-hidden border border-slate-800">
-                              <div
-                                className="bg-gradient-to-r from-purple-500 to-indigo-500 h-2 rounded-full transition-all duration-500"
-                                style={{ width: `${malariaResult.svmConfidence}%` }}
-                              />
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Result Output Card */}
-                        <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-1.5">
-                          <div className="text-[11px] text-slate-400 flex justify-between">
-                            <span>SAMPLE DIAGNOSIS:</span>
-                            <span className="text-teal-400">{malariaResult.latency}</span>
-                          </div>
-                          <div className="text-emerald-400 font-bold text-xs truncate">
-                            &gt; {malariaResult.status}
-                          </div>
-                        </div>
-
-                        <button
-                          onClick={triggerMalariaSample}
-                          className="w-full py-2 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/40 text-xs font-mono font-bold flex items-center justify-center gap-2 transition-all"
-                        >
-                          <Play className="w-3.5 h-3.5 text-cyan-400" />
-                          <span>Classify Next Blood Sample</span>
-                        </button>
-                      </div>
-                    )}
-
-                    {/* Typhoid Interactive Model Comparison Panel */}
-                    {project.demoType === 'rnn-vs-cnn' && (
-                      <div className="bg-slate-900/90 rounded-xl p-5 border border-emerald-500/30 space-y-4 font-mono text-xs shadow-inner">
-                        <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-                          <span className="text-emerald-400 font-bold flex items-center gap-2">
-                            <Activity className="w-4 h-4 text-emerald-400" />
-                            SPATIAL VS SEQUENTIAL
-                          </span>
-                          <span className="text-[11px] text-slate-400">Typhoid Analysis</span>
-                        </div>
-
-                        {/* Switch buttons */}
-                        <div className="grid grid-cols-2 gap-2">
-                          <button
-                            onClick={() => setTyphoidMetric('cnn')}
-                            className={`p-2 rounded-lg border text-center transition-all ${
-                              typhoidMetric === 'cnn'
-                                ? 'bg-emerald-950/80 border-emerald-500 text-emerald-300 font-bold'
-                                : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'
-                            }`}
-                          >
-                            CNN Spatial Vision
-                          </button>
-                          <button
-                            onClick={() => setTyphoidMetric('rnn')}
-                            className={`p-2 rounded-lg border text-center transition-all ${
-                              typhoidMetric === 'rnn'
-                                ? 'bg-emerald-950/80 border-emerald-500 text-emerald-300 font-bold'
-                                : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'
-                            }`}
-                          >
-                            RNN Temporal Trend
-                          </button>
-                        </div>
-
-                        {/* Metric Display */}
-                        <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-2">
-                          <div className="flex justify-between items-center">
-                            <span className="text-slate-400">Architecture:</span>
-                            <span className="text-white font-semibold">
-                              {typhoidMetric === 'cnn' ? 'Convolutional Feature Hierarchy' : 'Recurrent Sequential Memory'}
-                            </span>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-slate-400">Evaluated Accuracy:</span>
-                            <span className="text-emerald-400 font-bold">
-                              {typhoidMetric === 'cnn' ? '95.1% Overall Accuracy' : '91.8% Temporal Trend Accuracy'}
-                            </span>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-slate-400">Primary Strength:</span>
-                            <span className="text-teal-300">
-                              {typhoidMetric === 'cnn' ? 'Cell Morphological Invariance' : 'Patient Fever & Vitals Dynamics'}
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="text-[11px] text-slate-400 italic">
-                          * Research proved hybrid CNN-RNN configurations yield optimal clinical accuracy.
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Tennis Ball Robot Telemetry Widget */}
-                    {project.demoType === 'robotics-telemetry' && (
-                      <div className="bg-slate-900/90 rounded-xl p-5 border border-amber-500/30 space-y-4 font-mono text-xs shadow-inner">
-                        <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-                          <span className="text-amber-400 font-bold flex items-center gap-2">
-                            <Bot className="w-4 h-4 text-amber-400" />
-                            ROBOT TELEMETRY & RADAR
-                          </span>
-                          <span className="text-emerald-400 font-semibold flex items-center gap-1">
-                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                            AUTONOMOUS
-                          </span>
-                        </div>
-
-                        {/* Radar metrics */}
-                        <div className="grid grid-cols-2 gap-2">
-                          <div className="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-                            <span className="text-[10px] text-slate-400 block">COLLECTED BALLS</span>
-                            <span className="text-lg font-bold text-amber-400">
-                              {robotStatus.ballsCollected} / 15
-                            </span>
-                          </div>
-                          <div className="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-                            <span className="text-[10px] text-slate-400 block">TARGET DISTANCE</span>
-                            <span className="text-lg font-bold text-cyan-400">
-                              {robotStatus.distanceToBall}m
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* System Status Indicators */}
-                        <div className="bg-slate-950 p-2.5 rounded-lg border border-slate-800 space-y-1.5 text-[11px]">
-                          <div className="flex justify-between">
-                            <span className="text-slate-400">PWM Motor Output:</span>
-                            <span className="text-white font-semibold">{robotStatus.motorSpeed}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-slate-400">Intake Roller Status:</span>
-                            <span className="text-emerald-400 font-semibold">ROTATING (ACTIVE)</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-slate-400">Obstacle Avoidance:</span>
-                            <span className="text-cyan-400 font-semibold">CLEAR (HC-SR04 OK)</span>
-                          </div>
-                        </div>
-
-                        <button
-                          onClick={collectTennisBall}
-                          className="w-full py-2 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/40 text-xs font-mono font-bold flex items-center justify-center gap-2 transition-all"
-                        >
-                          <Play className="w-3.5 h-3.5 text-amber-400" />
-                          <span>Simulate Ball Intake (+1)</span>
-                        </button>
-                      </div>
-                    )}
-
-                  </div>
-
-                </div>
-              </div>
-            );
-          })}
+                {t}
+              </span>
+            ))}
+          </div>
         </div>
-
       </div>
-    </section>
+    </div>
   );
 }
 
+export default function Projects() {
+  const [selected, setSelected] = useState(null);
+
+  return (
+    <section id="projects" className="py-24 sm:py-32" style={{ background: '#0f0f0f' }}>
+      <div className="max-w-6xl mx-auto px-6 sm:px-10">
+        <SectionHeader
+          eyebrow="Portfolio"
+          title="Research & Projects"
+          subtitle="Rigorous engineering solutions at the intersection of hardware and intelligence"
+        />
+
+        <div className="space-y-6">
+          {projects.map((project, i) => (
+            <div
+              key={project.num}
+              className={`reveal delay-${(i + 1) * 100} hover-lift card-glow group cursor-pointer`}
+              style={{
+                background: 'rgba(255,255,255,0.025)',
+                border: '1px solid rgba(255,255,255,0.07)',
+                borderRadius: '2px',
+                padding: '28px 32px',
+              }}
+              onClick={() => setSelected(project)}
+            >
+              <div className="flex flex-col sm:flex-row sm:items-start gap-6 sm:gap-10">
+
+                {/* Number & Metric */}
+                <div className="flex sm:flex-col items-center sm:items-start gap-4 sm:gap-2 flex-shrink-0">
+                  <span className="font-elegant text-5xl font-light" style={{ color: 'rgba(201,168,76,0.2)' }}>
+                    {project.num}
+                  </span>
+                  <div className="sm:mt-3">
+                    <p className="font-display text-2xl font-bold gold-text">{project.metric}</p>
+                    <p className="font-body text-xs" style={{ color: 'rgba(201,168,76,0.5)', lineHeight: '1.4' }}>{project.metricLabel}</p>
+                  </div>
+                </div>
+
+                {/* Vertical divider */}
+                <div
+                  className="hidden sm:block w-px self-stretch"
+                  style={{ background: 'rgba(255,255,255,0.06)' }}
+                />
+
+                {/* Content */}
+                <div className="flex-1 space-y-3">
+                  <div>
+                    <span className="font-body text-xs tracking-widest uppercase" style={{ color: 'rgba(201,168,76,0.6)', letterSpacing: '0.15em' }}>
+                      {project.category}
+                    </span>
+                    <h3 className="font-display text-xl sm:text-2xl font-bold mt-1 group-hover:text-gold transition-colors duration-300" style={{ color: '#e8e0d4' }}>
+                      {project.title}
+                    </h3>
+                    <p className="font-elegant text-base italic" style={{ color: 'rgba(232,224,212,0.4)' }}>
+                      {project.subtitle}
+                    </p>
+                  </div>
+
+                  <p className="font-body text-sm leading-relaxed line-clamp-3" style={{ color: 'rgba(232,224,212,0.55)', lineHeight: '1.8' }}>
+                    {project.desc}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.slice(0, 4).map((t) => (
+                      <span
+                        key={t}
+                        className="font-body text-xs px-2.5 py-1 rounded-sm"
+                        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(232,224,212,0.4)' }}
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Arrow */}
+                <div
+                  className="self-center flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110"
+                  style={{
+                    border: '1px solid rgba(201,168,76,0.3)',
+                    color: 'rgba(201,168,76,0.6)',
+                    background: 'rgba(201,168,76,0.05)',
+                  }}
+                >
+                  <ArrowRight size={15} />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Modal */}
+      {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}
+    </section>
+  );
+}

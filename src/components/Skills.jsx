@@ -1,200 +1,143 @@
 import React, { useState } from 'react';
-import { 
-  Code2, 
-  Cpu, 
-  Boxes, 
-  Binary, 
-  Wifi, 
-  Activity, 
-  Radio, 
-  Brain, 
-  GitCommit, 
-  Gauge, 
-  Eye, 
-  Award, 
-  Lightbulb, 
-  MessageSquare, 
-  Users, 
-  Clock, 
-  Languages, 
-  CheckCircle2, 
-  Sparkles,
-  Layers
-} from 'lucide-react';
-import { portfolioData } from '../data/portfolioData';
+import { SectionHeader } from './About';
 
-const iconComponents = {
-  Code2,
-  Cpu,
-  Boxes,
-  Binary,
-  Wifi,
-  CircuitBoard: Cpu,
-  Activity,
-  Radio,
-  Brain,
-  GitCommit,
-  Gauge,
-  Eye,
-  Award,
-  Lightbulb,
-  MessageSquare,
-  Users,
-  Clock
-};
+const categories = [
+  {
+    id: 'technical',
+    label: 'Technical',
+    skills: [
+      { name: 'Python', level: 90 },
+      { name: 'C / Embedded C', level: 85 },
+      { name: 'Object-Oriented Programming', level: 88 },
+      { name: 'IoT Architecture & MQTT', level: 87 },
+      { name: 'Digital Electronics', level: 85 },
+      { name: 'Signal Processing', level: 80 },
+    ],
+  },
+  {
+    id: 'ai',
+    label: 'AI & ML',
+    skills: [
+      { name: 'Deep CNN (Medical Imaging)', level: 88 },
+      { name: 'Recurrent Neural Networks', level: 82 },
+      { name: 'Support Vector Machines', level: 84 },
+      { name: 'Computer Vision', level: 85 },
+      { name: 'TensorFlow / Keras', level: 80 },
+      { name: 'Scikit-learn', level: 83 },
+    ],
+  },
+  {
+    id: 'hardware',
+    label: 'Hardware',
+    skills: [
+      { name: 'Microcontroller Programming', level: 86 },
+      { name: 'Sensor & Actuator Interfacing', level: 85 },
+      { name: 'PWM Motor Control', level: 83 },
+      { name: 'I2C / SPI / UART Protocols', level: 80 },
+      { name: 'Circuit Design & Debugging', level: 78 },
+      { name: 'PCB Prototyping', level: 72 },
+    ],
+  },
+  {
+    id: 'soft',
+    label: 'Soft Skills',
+    skills: [
+      { name: 'Leadership & Initiative', level: 90 },
+      { name: 'Problem Solving', level: 92 },
+      { name: 'Communication', level: 88 },
+      { name: 'Teamwork', level: 90 },
+      { name: 'Time Management', level: 86 },
+      { name: 'Adaptability', level: 88 },
+    ],
+  },
+];
+
+const languages = [
+  { name: 'Telugu', level: 100, note: 'Native' },
+  { name: 'English', level: 92, note: 'Professional' },
+  { name: 'Hindi', level: 80, note: 'Working' },
+  { name: 'Tamil', level: 75, note: 'Conversational' },
+];
 
 export default function Skills() {
-  const { skillCategories, languages } = portfolioData;
-  const [activeTab, setActiveTab] = useState('all');
+  const [active, setActive] = useState('technical');
 
-  const tabs = [
-    { id: 'all', label: 'All Technologies' },
-    { id: 'programming', label: 'Programming & Core' },
-    { id: 'hardware', label: 'Embedded & Hardware' },
-    { id: 'ai', label: 'AI & Deep Learning' },
-    { id: 'softskills', label: 'Soft Skills' },
-    { id: 'languages', label: 'Spoken Languages' },
-  ];
-
-  const filteredCategories =
-    activeTab === 'all'
-      ? skillCategories
-      : skillCategories.filter((cat) => cat.id === activeTab);
+  const current = categories.find((c) => c.id === active);
 
   return (
-    <section id="skills" className="py-20 relative circuit-grid no-scrollbar">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-xs font-mono text-cyan-400">
-            <Layers className="w-3.5 h-3.5" />
-            <span>TECHNICAL EXPERTISE</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Skills & Core Capabilities
-          </h2>
-          <p className="text-sm sm:text-base text-slate-400 font-mono">
-            Proven competencies across electronics, software systems, and intelligent models
-          </p>
-        </div>
+    <section id="skills" className="py-24 sm:py-32" style={{ background: '#0d0d0d' }}>
+      <div className="max-w-6xl mx-auto px-6 sm:px-10">
+        <SectionHeader
+          eyebrow="Expertise"
+          title="Skills & Competencies"
+          subtitle="A breadth of knowledge across hardware, software, and intelligent systems"
+        />
 
-        {/* Tab Filters: Horizontally scrollable on mobile with hidden scrollbar */}
-        <div className="flex items-center gap-2 mb-10 sm:mb-12 overflow-x-auto no-scrollbar pb-2 sm:pb-0 sm:flex-wrap sm:justify-center">
-          {tabs.map((tab) => (
+        {/* Category Tabs */}
+        <div className="reveal flex flex-wrap gap-2 mb-12">
+          {categories.map((cat) => (
             <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-mono whitespace-nowrap transition-all duration-200 flex-shrink-0 ${
-                activeTab === tab.id
-                  ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold shadow-md shadow-cyan-500/25 scale-105'
-                  : 'bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:border-slate-700'
-              }`}
+              key={cat.id}
+              onClick={() => setActive(cat.id)}
+              className="font-body text-xs px-5 py-2.5 tracking-widest uppercase transition-all duration-300"
+              style={{
+                letterSpacing: '0.12em',
+                background: active === cat.id ? 'rgba(201,168,76,0.12)' : 'transparent',
+                border: active === cat.id ? '1px solid rgba(201,168,76,0.5)' : '1px solid rgba(255,255,255,0.08)',
+                color: active === cat.id ? '#c9a84c' : 'rgba(232,224,212,0.5)',
+                borderRadius: '2px',
+              }}
             >
-              {tab.label}
+              {cat.label}
             </button>
           ))}
         </div>
 
-        {/* Main Skills Content */}
-        {activeTab !== 'languages' && (
-          <div className="space-y-10 sm:space-y-12">
-            {filteredCategories.map((category) => (
-              <div key={category.id} className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <h3 className="text-base sm:text-lg font-bold font-mono text-cyan-300">
-                    // {category.name}
-                  </h3>
-                  <div className="h-px flex-1 bg-gradient-to-r from-cyan-500/30 to-transparent"></div>
-                </div>
+        {/* Skill Bars */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-7 mb-16">
+          {current.skills.map((skill, i) => (
+            <div key={skill.name} className={`reveal delay-${i < 3 ? (i + 1) * 100 : (i - 2) * 100}`}>
+              <div className="flex justify-between mb-2">
+                <span className="font-body text-sm" style={{ color: 'rgba(232,224,212,0.75)' }}>{skill.name}</span>
+                <span className="font-body text-xs" style={{ color: 'rgba(201,168,76,0.7)' }}>{skill.level}%</span>
+              </div>
+              <div className="h-px w-full" style={{ background: 'rgba(255,255,255,0.08)' }}>
+                <div
+                  className="skill-bar-fill"
+                  style={{ width: `${skill.level}%` }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
-                  {category.skills.map((skill, idx) => {
-                    const IconComp = iconComponents[skill.icon] || Cpu;
-                    return (
-                      <div
-                        key={idx}
-                        className="glass-panel p-4 sm:p-5 rounded-2xl border border-slate-800 hover:border-cyan-500/40 hover:shadow-lg hover:shadow-cyan-500/5 transition-all group"
-                      >
-                        <div className="flex items-start justify-between mb-3">
-                          <div className="flex items-center gap-2.5 sm:gap-3">
-                            <div className="p-2 rounded-lg bg-cyan-950/70 border border-cyan-500/30 text-cyan-400 group-hover:scale-110 transition-transform">
-                              <IconComp className="w-4 sm:w-5 h-4 sm:h-5" />
-                            </div>
-                            <span className="font-semibold text-white text-xs sm:text-sm">
-                              {skill.name}
-                            </span>
-                          </div>
-                          <span className="text-xs font-mono font-bold text-cyan-400">
-                            {skill.level}%
-                          </span>
-                        </div>
-
-                        {/* Progress Bar */}
-                        <div className="w-full bg-slate-950 rounded-full h-1.5 sm:h-2 overflow-hidden border border-slate-800 mb-3">
-                          <div
-                            className="bg-gradient-to-r from-cyan-500 to-blue-500 h-full rounded-full transition-all duration-700 ease-out"
-                            style={{ width: `${skill.level}%` }}
-                          />
-                        </div>
-
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-1">
-                          {skill.tags.map((tag, tIdx) => (
-                            <span
-                              key={tIdx}
-                              className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700/60"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    );
-                  })}
+        {/* Languages */}
+        <div className="reveal">
+          <h3
+            className="font-body text-xs tracking-widest uppercase mb-8"
+            style={{ color: 'rgba(201,168,76,0.6)', letterSpacing: '0.15em' }}
+          >
+            Spoken Languages
+          </h3>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
+            {languages.map((lang, i) => (
+              <div
+                key={lang.name}
+                className={`reveal delay-${(i + 1) * 100} hover-lift card-glow p-5 rounded-sm text-center`}
+                style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.06)' }}
+              >
+                <p className="font-display text-xl font-bold mb-1" style={{ color: '#e8e0d4' }}>{lang.name}</p>
+                <p className="font-elegant text-sm italic mb-3" style={{ color: 'rgba(201,168,76,0.7)' }}>{lang.note}</p>
+                <div className="h-px w-full" style={{ background: 'rgba(255,255,255,0.08)' }}>
+                  <div
+                    className="skill-bar-fill"
+                    style={{ width: `${lang.level}%` }}
+                  />
                 </div>
               </div>
             ))}
           </div>
-        )}
-
-        {/* Spoken Languages Section */}
-        {(activeTab === 'all' || activeTab === 'languages') && (
-          <div className="mt-12 sm:mt-14 space-y-5 sm:space-y-6">
-            <div className="flex items-center gap-3">
-              <h3 className="text-base sm:text-lg font-bold font-mono text-teal-300 flex items-center gap-2">
-                <Languages className="w-5 h-5 text-teal-400" />
-                <span>// Spoken Languages (Multilingual Proficiency)</span>
-              </h3>
-              <div className="h-px flex-1 bg-gradient-to-r from-teal-500/30 to-transparent"></div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
-              {languages.map((lang, idx) => (
-                <div
-                  key={idx}
-                  className="glass-panel p-4 sm:p-5 rounded-2xl border border-slate-800 hover:border-teal-500/40 transition-all"
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm sm:text-base font-bold text-white font-mono">
-                      {lang.name}
-                    </span>
-                    <span className="text-xs font-mono px-2 py-0.5 rounded bg-teal-950/70 border border-teal-500/30 text-teal-300">
-                      {lang.level}%
-                    </span>
-                  </div>
-                  <p className="text-[11px] sm:text-xs text-slate-400 mb-3">{lang.proficiency}</p>
-                  <div className="w-full bg-slate-950 rounded-full h-1.5 overflow-hidden border border-slate-800">
-                    <div
-                      className="bg-gradient-to-r from-teal-400 to-cyan-500 h-1.5 rounded-full"
-                      style={{ width: `${lang.level}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        </div>
 
       </div>
     </section>
