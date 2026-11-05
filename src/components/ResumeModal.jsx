@@ -1,174 +1,151 @@
 import React from 'react';
-import { X, Printer } from 'lucide-react';
+import { X, Printer, Mail, MapPin, GraduationCap } from 'lucide-react';
+import { portfolioData } from '../data/portfolioData';
 import profilePhoto from '../image/Harshavardhan.jpeg';
 
-const data = {
-  name: 'SURABHI KAMESH SRI SURYA HARSHAVARDHAN',
-  title: 'Electronics & Communication Engineering Graduate',
-  email: 'harshavardhan9@gmail.com',
-  location: 'Chennai, TN / Tirupathi, AP',
-  summary:
-    'Electronics and Communication Engineering (ECE) graduate with strong fundamentals in digital electronics, signal processing, and embedded systems. Proficient in C and Python programming, with practical knowledge of IoT and embedded application development. Passionate about developing efficient hardware-software integrated solutions and exploring real-world engineering applications.',
-  education: [
-    { inst: 'Saveetha School of Engineering, Chennai', period: '2022–2026', degree: 'B.Tech ECE', grade: 'CGPA: 7.38 / 10.0' },
-    { inst: 'Viswasai Junior College, Tirupathi', period: '2020–2022', degree: 'Intermediate (MPC)', grade: '51%' },
-    { inst: 'Model Academy EM School, Renigunta', period: '2019–2020', degree: 'SSC / 10th Standard', grade: '85%' },
-  ],
-  skills: ['Python', 'C / Embedded C', 'OOP', 'IoT & MQTT', 'Digital Electronics', 'Signal Processing', 'Deep CNN', 'RNN', 'SVM', 'TensorFlow', 'OpenCV', 'Microcontrollers', 'Sensor Interfacing'],
-  softSkills: ['Leadership', 'Problem Solving', 'Communication', 'Teamwork', 'Time Management'],
-  languages: ['Telugu (Native)', 'English (Professional)', 'Hindi (Working)', 'Tamil (Conversational)'],
-  projects: [
-    {
-      title: 'Malaria Parasite Categorization: CNN vs. SVM',
-      desc: 'Developed a machine learning framework to classify malaria parasites from microscopic blood cell images using CNN and SVM models. CNN achieved 96.4% accuracy, outperforming SVM by +7.3% with 97.1% sensitivity.',
-    },
-    {
-      title: 'Typhoid Parasite Detection: RNN vs. CNN',
-      desc: 'Comparative deep learning study evaluating RNN (temporal biomarker trends) against CNN (spatial morphology) for typhoid detection, with key insights into hybrid multi-modal diagnostic architectures.',
-    },
-    {
-      title: 'AI-Integrated Tennis Ball Collector Robot',
-      desc: 'Designed an autonomous robot combining computer vision ball detection, embedded C/C++ motor firmware, ultrasonic obstacle avoidance, and a mechanical roller intake — achieving 92% collection efficiency.',
-    },
-  ],
-};
-
 export default function ResumeModal({ isOpen, onClose }) {
+  const { personal, education, projects, skillCategories, languages } = portfolioData;
+
   if (!isOpen) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto"
-      style={{ background: 'rgba(0,0,0,0.9)' }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-3xl rounded-sm my-6"
-        style={{ background: '#fff', color: '#1a1a1a' }}
+        className="relative w-full max-w-4xl bg-[#0d0d14] border border-white/20 rounded-3xl overflow-hidden my-6 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Action bar */}
-        <div
-          className="flex items-center justify-between px-6 py-3 print:hidden"
-          style={{ background: '#f9f7f3', borderBottom: '1px solid #e5e0d8' }}
-        >
-          <span className="font-body text-xs tracking-widest uppercase" style={{ color: '#888', letterSpacing: '0.12em' }}>
-            Resume Preview
-          </span>
-          <div className="flex items-center gap-3">
+        {/* Modal Top Bar */}
+        <div className="flex items-center justify-between p-4 sm:p-5 border-b border-white/10 bg-white/5 print:hidden">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#ff3366] shadow-[0_0_8px_#ff3366]" />
+            <span className="text-xs font-bold text-white uppercase tracking-wider">
+              Curriculum Vitae • {personal.fullName}
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
             <button
               onClick={() => window.print()}
-              className="flex items-center gap-2 px-4 py-2 font-body text-xs tracking-wider"
-              style={{ background: '#c9a84c', color: '#fff', borderRadius: '2px', letterSpacing: '0.08em' }}
+              className="btn-glossy flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold text-white shadow"
             >
-              <Printer size={13} />
-              Print / Save PDF
+              <Printer className="w-3.5 h-3.5" />
+              <span>Print / PDF</span>
             </button>
-            <button onClick={onClose} style={{ color: '#999' }}>
-              <X size={18} />
+            <button
+              onClick={onClose}
+              className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/60 hover:text-white"
+            >
+              <X className="w-5 h-5" />
             </button>
           </div>
         </div>
 
-        {/* Resume Document */}
-        <div className="p-8 sm:p-12 max-h-[80vh] overflow-y-auto" style={{ background: '#fff' }}>
-
-          {/* Header */}
-          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 pb-6 mb-6" style={{ borderBottom: '2px solid #c9a84c' }}>
-            <img
-              src={profilePhoto}
-              alt={data.name}
-              className="w-20 h-20 object-cover object-top flex-shrink-0 rounded-sm"
-              style={{ border: '2px solid #c9a84c' }}
-            />
-            <div className="text-center sm:text-left">
-              <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.4rem', fontWeight: 700, color: '#1a1a1a', letterSpacing: '0.03em' }}>
-                {data.name}
+        {/* Resume Content */}
+        <div className="p-6 sm:p-10 max-h-[80vh] overflow-y-auto no-scrollbar space-y-6 text-white/80 text-xs sm:text-sm bg-[#0a0a0f] print:max-h-none print:p-0">
+          
+          {/* Header Card */}
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 pb-6 border-b border-white/10">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-[#ff3366] shadow-[0_0_15px_rgba(230,0,57,0.3)] flex-shrink-0">
+              <img
+                src={profilePhoto}
+                alt={personal.fullName}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="space-y-1.5 text-center sm:text-left flex-1">
+              <h1 className="text-xl sm:text-2xl font-display font-extrabold text-white">
+                {personal.fullName}
               </h1>
-              <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', color: '#c9a84c', marginTop: 4, letterSpacing: '0.08em' }}>
-                {data.title}
+              <p className="text-xs sm:text-sm font-semibold text-[#ff3366]">
+                Electronics and Communication Engineering (ECE) Graduate
               </p>
-              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 mt-2" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: '#888' }}>
-                <span>📧 {data.email}</span>
-                <span>📍 {data.location}</span>
-                <span>🎓 CGPA 7.38 / 10.0</span>
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 text-xs text-white/60 pt-1">
+                <span className="flex items-center gap-1">
+                  <Mail className="w-3.5 h-3.5 text-[#ff3366]" />
+                  {personal.email}
+                </span>
+                <span className="flex items-center gap-1">
+                  <MapPin className="w-3.5 h-3.5 text-[#ff3366]" />
+                  {personal.location}
+                </span>
+                <span className="flex items-center gap-1">
+                  <GraduationCap className="w-3.5 h-3.5 text-[#ff3366]" />
+                  CGPA: 7.38 / 10.0
+                </span>
               </div>
             </div>
           </div>
 
-          {/* Summary */}
-          <ResumeSection title="Professional Summary">
-            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', lineHeight: 1.8, color: '#555' }}>{data.summary}</p>
-          </ResumeSection>
+          {/* Professional Summary */}
+          <div className="space-y-1.5">
+            <h2 className="text-xs font-bold text-[#ff3366] uppercase tracking-wider border-b border-white/10 pb-1">
+              Professional Summary
+            </h2>
+            <p className="text-white/70 leading-relaxed text-xs">
+              {personal.summary}
+            </p>
+          </div>
 
           {/* Education */}
-          <ResumeSection title="Education">
+          <div className="space-y-2.5">
+            <h2 className="text-xs font-bold text-[#ff3366] uppercase tracking-wider border-b border-white/10 pb-1">
+              Education
+            </h2>
             <div className="space-y-3">
-              {data.education.map((e) => (
-                <div key={e.inst} className="flex justify-between items-start">
-                  <div>
-                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', fontWeight: 600, color: '#1a1a1a' }}>{e.inst}</p>
-                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: '#777', fontStyle: 'italic' }}>{e.degree}</p>
+              {education.map((edu, idx) => (
+                <div key={idx} className="space-y-0.5">
+                  <div className="flex justify-between items-center text-xs">
+                    <span className="font-bold text-white">{edu.institution} ({edu.location})</span>
+                    <span className="font-mono text-white/50 text-[11px]">{edu.period}</span>
                   </div>
-                  <div className="text-right">
-                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: '#c9a84c', fontWeight: 600 }}>{e.grade}</p>
-                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.7rem', color: '#999' }}>{e.period}</p>
+                  <div className="flex justify-between text-[11px] text-[#ff3366]">
+                    <span>{edu.degree}</span>
+                    <span className="font-bold text-white">{edu.score}</span>
                   </div>
                 </div>
               ))}
             </div>
-          </ResumeSection>
+          </div>
 
           {/* Skills */}
-          <ResumeSection title="Technical Skills">
-            <div className="flex flex-wrap gap-2">
-              {data.skills.map((s) => (
-                <span key={s} style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.72rem', background: '#f5f0e8', border: '1px solid #e0d5c0', borderRadius: 2, padding: '3px 10px', color: '#5a4a30' }}>
-                  {s}
-                </span>
-              ))}
+          <div className="space-y-2">
+            <h2 className="text-xs font-bold text-[#ff3366] uppercase tracking-wider border-b border-white/10 pb-1">
+              Technical Skills & Areas of Interest
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <div className="p-2.5 rounded-xl bg-white/5 border border-white/5">
+                <span className="text-[#ff3366] font-bold block mb-1">Technical Skills:</span>
+                <span>Python, Object Oriented Programming, C, Embedded Systems</span>
+              </div>
+              <div className="p-2.5 rounded-xl bg-white/5 border border-white/5">
+                <span className="text-[#ff3366] font-bold block mb-1">Areas of Interest:</span>
+                <span>IoT, Embedded Hardware, Signal Processing, Digital Electronics</span>
+              </div>
             </div>
-          </ResumeSection>
-
-          {/* Soft Skills & Languages */}
-          <div className="grid grid-cols-2 gap-6">
-            <ResumeSection title="Soft Skills" compact>
-              {data.softSkills.map((s) => (
-                <p key={s} style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: '#555', lineHeight: 1.7 }}>• {s}</p>
-              ))}
-            </ResumeSection>
-            <ResumeSection title="Languages" compact>
-              {data.languages.map((l) => (
-                <p key={l} style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: '#555', lineHeight: 1.7 }}>• {l}</p>
-              ))}
-            </ResumeSection>
           </div>
 
           {/* Projects */}
-          <ResumeSection title="Projects">
-            <div className="space-y-4">
-              {data.projects.map((p) => (
-                <div key={p.title}>
-                  <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', fontWeight: 600, color: '#1a1a1a' }}>{p.title}</p>
-                  <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: '#666', marginTop: 3, lineHeight: 1.75 }}>{p.desc}</p>
+          <div className="space-y-3">
+            <h2 className="text-xs font-bold text-[#ff3366] uppercase tracking-wider border-b border-white/10 pb-1">
+              Key Engineering Projects
+            </h2>
+            <div className="space-y-3">
+              {projects.map((proj, idx) => (
+                <div key={idx} className="p-3 rounded-xl bg-white/5 border border-white/5 space-y-1">
+                  <div className="flex justify-between items-start">
+                    <h3 className="font-bold text-white text-xs">{proj.title}</h3>
+                    <span className="text-[10px] text-[#ff3366] font-bold">{proj.category}</span>
+                  </div>
+                  <p className="text-[11px] text-white/70 leading-relaxed">{proj.shortDescription}</p>
                 </div>
               ))}
             </div>
-          </ResumeSection>
+          </div>
 
         </div>
       </div>
-    </div>
-  );
-}
-
-function ResumeSection({ title, children, compact }) {
-  return (
-    <div className={compact ? 'mb-4' : 'mb-6'}>
-      <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '0.9rem', fontWeight: 700, color: '#1a1a1a', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 10, paddingBottom: 4, borderBottom: '1px solid #e0d5c0' }}>
-        {title}
-      </h2>
-      {children}
     </div>
   );
 }

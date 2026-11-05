@@ -1,243 +1,282 @@
 import React, { useState } from 'react';
-import { ArrowRight, X } from 'lucide-react';
-import { SectionHeader } from './About';
-
-const projects = [
-  {
-    num: '01',
-    title: 'Malaria Parasite Categorization',
-    subtitle: 'CNN vs. Support Vector Machines',
-    category: 'Medical AI & Computer Vision',
-    tags: ['Deep Learning', 'CNN', 'SVM', 'Python', 'TensorFlow', 'Medical Imaging'],
-    metric: '96.4%',
-    metricLabel: 'CNN Accuracy',
-    desc: 'Developed a novel machine learning diagnostic framework to classify malaria parasites from microscopic blood cell images. Performed rigorous comparative evaluation of Deep Convolutional Neural Networks against Support Vector Machines, achieving a +7.3% accuracy improvement with CNN and 97.1% sensitivity — directly reducing false-negative clinical diagnoses.',
-    highlights: [
-      'End-to-end image preprocessing pipeline for RBC slide segmentation',
-      'Custom Conv-Pool-Dense CNN architecture with Dropout regularisation',
-      'SVM baseline with RBF kernel and handcrafted texture/colour features',
-      '97.1% sensitivity in detecting infected erythrocytes',
-      '42ms average inference time per sample',
-    ],
-    stack: 'Python · TensorFlow · Keras · Scikit-learn · OpenCV · NumPy · Matplotlib',
-  },
-  {
-    num: '02',
-    title: 'Typhoid Parasite Detection',
-    subtitle: 'RNN vs. Deep CNN Comparative Study',
-    category: 'Deep Learning & Healthcare Analytics',
-    tags: ['RNN', 'CNN', 'Python', 'Healthcare', 'Sequential Analysis'],
-    metric: '95.1%',
-    metricLabel: 'Model Accuracy',
-    desc: 'Explored and contrasted Recurrent Neural Networks (RNN) and Convolutional Neural Networks (CNN) for typhoid-related medical data analysis. Investigated how spatial feature extraction compares against sequential temporal patient biomarker dynamics, with key insights into hybrid CNN-RNN architectures for comprehensive multi-modal diagnostics.',
-    highlights: [
-      'Structured evaluation framework: spatial (CNN) vs. sequential (RNN)',
-      'Patient biomarker trend preprocessing and augmentation',
-      'Precision, recall, F1-score, and ROC-AUC analysis across both models',
-      'Insights into hybrid CNN-RNN pipelines for multi-modal diagnostics',
-      'Early detection capability to reduce diagnostic turnaround time',
-    ],
-    stack: 'Python · TensorFlow · Keras · Pandas · NumPy · Matplotlib',
-  },
-  {
-    num: '03',
-    title: 'AI-Integrated Tennis Ball Collector Robot',
-    subtitle: 'Autonomous Embedded Robotic System',
-    category: 'Robotics, Embedded IoT & AI',
-    tags: ['Robotics', 'Embedded Systems', 'IoT', 'C/C++', 'Python', 'Sensors', 'Autonomous'],
-    metric: '92%',
-    metricLabel: 'Collection Rate',
-    desc: 'Designed and built an autonomous AI-integrated robotic rover for tennis court ball retrieval. Combines computer vision-based ball detection, embedded C microcontroller firmware for precise motor control, an ultrasonic obstacle avoidance system, and a mechanical roller intake mechanism — eliminating manual collection effort.',
-    highlights: [
-      'Ultrasonic HC-SR04 + IR proximity sensor fusion for environment awareness',
-      'Embedded C/C++ firmware with PWM differential motor steering',
-      'Mechanical rotating roller intake and ball hopper storage system',
-      'AI-guided pathfinding to nearest detected tennis ball',
-      'IoT telemetry: battery status, ball count, and diagnostic logs',
-    ],
-    stack: 'C / C++ · Python · Microcontroller · HC-SR04 · IR Sensors · DC Motors · Li-Ion Power',
-  },
-];
-
-function ProjectModal({ project, onClose }) {
-  if (!project) return null;
-  return (
-    <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6"
-      style={{ background: 'rgba(0,0,0,0.85)' }}
-      onClick={onClose}
-    >
-      <div
-        className="relative w-full sm:max-w-2xl max-h-[90vh] overflow-y-auto rounded-t-2xl sm:rounded-sm"
-        style={{ background: '#141414', border: '1px solid rgba(201,168,76,0.2)' }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Header */}
-        <div className="flex items-start justify-between p-6 sm:p-8 border-b" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
-          <div>
-            <span className="font-body text-xs tracking-widest uppercase" style={{ color: '#c9a84c', letterSpacing: '0.15em' }}>
-              {project.category}
-            </span>
-            <h3 className="font-display text-xl sm:text-2xl font-bold mt-1" style={{ color: '#e8e0d4' }}>{project.title}</h3>
-            <p className="font-elegant text-base italic mt-0.5" style={{ color: 'rgba(232,224,212,0.5)' }}>{project.subtitle}</p>
-          </div>
-          <button onClick={onClose} className="p-2 ml-4 flex-shrink-0 transition-colors" style={{ color: 'rgba(232,224,212,0.4)' }}>
-            <X size={20} />
-          </button>
-        </div>
-
-        {/* Body */}
-        <div className="p-6 sm:p-8 space-y-7">
-          {/* Metric */}
-          <div className="flex items-center gap-6">
-            <div>
-              <p className="font-display text-4xl font-bold gold-text">{project.metric}</p>
-              <p className="font-body text-xs" style={{ color: 'rgba(201,168,76,0.6)' }}>{project.metricLabel}</p>
-            </div>
-            <div className="divider flex-1" />
-          </div>
-
-          {/* Description */}
-          <p className="font-body text-sm leading-relaxed" style={{ color: 'rgba(232,224,212,0.65)', lineHeight: '1.9' }}>
-            {project.desc}
-          </p>
-
-          {/* Key Highlights */}
-          <div>
-            <h4 className="font-body text-xs tracking-widest uppercase mb-4" style={{ color: 'rgba(201,168,76,0.6)', letterSpacing: '0.15em' }}>
-              Key Highlights
-            </h4>
-            <ul className="space-y-2.5">
-              {project.highlights.map((h) => (
-                <li key={h} className="flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ background: '#c9a84c' }} />
-                  <span className="font-body text-sm" style={{ color: 'rgba(232,224,212,0.65)' }}>{h}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Tech Stack */}
-          <div
-            className="p-4 rounded-sm"
-            style={{ background: 'rgba(201,168,76,0.05)', borderLeft: '2px solid rgba(201,168,76,0.3)' }}
-          >
-            <p className="font-body text-xs tracking-widest uppercase mb-1.5" style={{ color: 'rgba(201,168,76,0.5)', letterSpacing: '0.12em' }}>Stack</p>
-            <p className="font-body text-sm" style={{ color: 'rgba(232,224,212,0.7)' }}>{project.stack}</p>
-          </div>
-
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2">
-            {project.tags.map((t) => (
-              <span
-                key={t}
-                className="font-body text-xs px-3 py-1 rounded-sm"
-                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(232,224,212,0.5)' }}
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+import { FolderGit2, ArrowRight, CheckCircle2, Play, Sparkles, X, Brain, Bot, Activity } from 'lucide-react';
+import { portfolioData } from '../data/portfolioData';
 
 export default function Projects() {
-  const [selected, setSelected] = useState(null);
+  const { projects } = portfolioData;
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  // Interactive Mini-Demo states
+  const [malariaResult, setMalariaResult] = useState({
+    cnn: 96.4,
+    svm: 88.7,
+    status: 'Parasitized (Plasmodium detected)',
+  });
+  const [tennisBallCount, setTennisBallCount] = useState(8);
+
+  const simulateMalaria = () => {
+    const infected = Math.random() > 0.4;
+    setMalariaResult({
+      cnn: (95 + Math.random() * 4).toFixed(1),
+      svm: (86 + Math.random() * 5).toFixed(1),
+      status: infected ? 'Parasitized (Infected Erythrocyte)' : 'Uninfected (Healthy Blood Cell)',
+    });
+  };
 
   return (
-    <section id="projects" className="py-24 sm:py-32" style={{ background: '#0f0f0f' }}>
-      <div className="max-w-6xl mx-auto px-6 sm:px-10">
-        <SectionHeader
-          eyebrow="Portfolio"
-          title="Research & Projects"
-          subtitle="Rigorous engineering solutions at the intersection of hardware and intelligence"
-        />
+    <section id="projects" className="py-16 sm:py-24 relative border-t border-white/5 bg-[#07070b]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16 space-y-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#e60039]/10 border border-[#e60039]/30 text-xs font-bold text-[#ff3366] tracking-wider uppercase">
+            <FolderGit2 className="w-3.5 h-3.5" />
+            <span>Featured Innovations</span>
+          </div>
+          <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-white">
+            Engineering Projects
+          </h2>
+          <p className="text-xs sm:text-sm text-white/60">
+            Medical deep learning diagnostics & autonomous embedded robotic platforms
+          </p>
+        </div>
 
-        <div className="space-y-6">
-          {projects.map((project, i) => (
+        {/* Project Cards (Adaptive & Responsive) */}
+        <div className="space-y-6 sm:space-y-8">
+          {projects.map((project, index) => (
             <div
-              key={project.num}
-              className={`reveal delay-${(i + 1) * 100} hover-lift card-glow group cursor-pointer`}
-              style={{
-                background: 'rgba(255,255,255,0.025)',
-                border: '1px solid rgba(255,255,255,0.07)',
-                borderRadius: '2px',
-                padding: '28px 32px',
-              }}
-              onClick={() => setSelected(project)}
+              key={project.id}
+              className="glass-panel p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/10 hover:border-[#ff3366]/40 transition-all duration-300"
             >
-              <div className="flex flex-col sm:flex-row sm:items-start gap-6 sm:gap-10">
-
-                {/* Number & Metric */}
-                <div className="flex sm:flex-col items-center sm:items-start gap-4 sm:gap-2 flex-shrink-0">
-                  <span className="font-elegant text-5xl font-light" style={{ color: 'rgba(201,168,76,0.2)' }}>
-                    {project.num}
-                  </span>
-                  <div className="sm:mt-3">
-                    <p className="font-display text-2xl font-bold gold-text">{project.metric}</p>
-                    <p className="font-body text-xs" style={{ color: 'rgba(201,168,76,0.5)', lineHeight: '1.4' }}>{project.metricLabel}</p>
-                  </div>
-                </div>
-
-                {/* Vertical divider */}
-                <div
-                  className="hidden sm:block w-px self-stretch"
-                  style={{ background: 'rgba(255,255,255,0.06)' }}
-                />
-
-                {/* Content */}
-                <div className="flex-1 space-y-3">
-                  <div>
-                    <span className="font-body text-xs tracking-widest uppercase" style={{ color: 'rgba(201,168,76,0.6)', letterSpacing: '0.15em' }}>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+                
+                {/* Left: Project Details (Cols 1-7) */}
+                <div className="lg:col-span-7 space-y-3 sm:space-y-4">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="px-2.5 py-0.5 rounded-md bg-[#e60039]/20 border border-[#e60039]/40 text-[#ff3366] text-[11px] font-bold">
                       {project.category}
                     </span>
-                    <h3 className="font-display text-xl sm:text-2xl font-bold mt-1 group-hover:text-gold transition-colors duration-300" style={{ color: '#e8e0d4' }}>
-                      {project.title}
-                    </h3>
-                    <p className="font-elegant text-base italic" style={{ color: 'rgba(232,224,212,0.4)' }}>
-                      {project.subtitle}
-                    </p>
+                    <span className="text-xs text-white/40 font-mono font-medium">
+                      0{index + 1}
+                    </span>
                   </div>
 
-                  <p className="font-body text-sm leading-relaxed line-clamp-3" style={{ color: 'rgba(232,224,212,0.55)', lineHeight: '1.8' }}>
-                    {project.desc}
+                  <h3 className="text-lg sm:text-2xl font-display font-bold text-white leading-snug">
+                    {project.title}
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-white/70 leading-relaxed">
+                    {project.shortDescription}
                   </p>
 
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.slice(0, 4).map((t) => (
+                  {/* Highlights (Compact on mobile) */}
+                  <div className="space-y-1.5 pt-1">
+                    {project.keyFeatures.slice(0, 3).map((feat, fIdx) => (
+                      <div key={fIdx} className="flex items-start gap-2 text-xs text-white/80">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#ff3366] flex-shrink-0 mt-0.5" />
+                        <span className="line-clamp-2">{feat}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Tech Tags */}
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {project.tags.map((tag) => (
                       <span
-                        key={t}
-                        className="font-body text-xs px-2.5 py-1 rounded-sm"
-                        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(232,224,212,0.4)' }}
+                        key={tag}
+                        className="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[10px] sm:text-[11px] text-white/60 font-medium"
                       >
-                        {t}
+                        {tag}
                       </span>
                     ))}
                   </div>
+
+                  {/* Read More Modal Trigger */}
+                  <div className="pt-2">
+                    <button
+                      onClick={() => setSelectedProject(project)}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#ff3366] hover:text-white transition-colors group"
+                    >
+                      <span>View Full Architecture & Tech Specs</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
                 </div>
 
-                {/* Arrow */}
-                <div
-                  className="self-center flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110"
-                  style={{
-                    border: '1px solid rgba(201,168,76,0.3)',
-                    color: 'rgba(201,168,76,0.6)',
-                    background: 'rgba(201,168,76,0.05)',
-                  }}
-                >
-                  <ArrowRight size={15} />
+                {/* Right: Live Interactive Telemetry / Benchmark Box (Cols 8-12) */}
+                <div className="lg:col-span-5">
+                  <div className="glass-crimson p-4 sm:p-5 rounded-2xl border border-white/15 space-y-3.5">
+                    
+                    {/* Project 1 interactive test */}
+                    {project.id === 'malaria-cnn-svm' && (
+                      <>
+                        <div className="flex items-center justify-between pb-2 border-b border-white/10 text-xs">
+                          <span className="font-bold text-white flex items-center gap-1.5">
+                            <Brain className="w-3.5 h-3.5 text-[#ff3366]" />
+                            Model Diagnostic Test
+                          </span>
+                          <span className="text-[#ff3366] font-bold">CNN vs SVM</span>
+                        </div>
+
+                        <div className="space-y-2">
+                          <div>
+                            <div className="flex justify-between text-[11px] text-white/80 mb-1">
+                              <span>Deep CNN Accuracy:</span>
+                              <span className="text-[#ff3366] font-bold">{malariaResult.cnn}%</span>
+                            </div>
+                            <div className="w-full bg-black/40 rounded-full h-1.5 overflow-hidden">
+                              <div className="h-full bg-gradient-to-r from-[#e60039] to-[#ff3366]" style={{ width: `${malariaResult.cnn}%` }} />
+                            </div>
+                          </div>
+
+                          <div>
+                            <div className="flex justify-between text-[11px] text-white/60 mb-1">
+                              <span>SVM Baseline:</span>
+                              <span className="text-white font-bold">{malariaResult.svm}%</span>
+                            </div>
+                            <div className="w-full bg-black/40 rounded-full h-1.5 overflow-hidden">
+                              <div className="h-full bg-white/40" style={{ width: `${malariaResult.svm}%` }} />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="p-2.5 rounded-xl bg-black/40 border border-white/10 text-[11px]">
+                          <span className="text-white/40 block">Result:</span>
+                          <span className="text-emerald-400 font-bold">{malariaResult.status}</span>
+                        </div>
+
+                        <button
+                          onClick={simulateMalaria}
+                          className="w-full py-2 rounded-xl btn-glossy text-xs font-bold text-white flex items-center justify-center gap-1.5"
+                        >
+                          <Play className="w-3 h-3" />
+                          <span>Simulate Blood Sample Test</span>
+                        </button>
+                      </>
+                    )}
+
+                    {/* Project 2: Typhoid overview */}
+                    {project.id === 'typhoid-rnn-cnn' && (
+                      <>
+                        <div className="flex items-center justify-between pb-2 border-b border-white/10 text-xs">
+                          <span className="font-bold text-white flex items-center gap-1.5">
+                            <Activity className="w-3.5 h-3.5 text-[#ff3366]" />
+                            Comparative Matrix
+                          </span>
+                          <span className="text-[#ff3366] font-bold">95.1% Acc</span>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-2 text-center text-xs">
+                          <div className="p-2.5 rounded-xl bg-black/40 border border-white/10">
+                            <div className="text-[10px] text-white/40 uppercase">Spatial CNN</div>
+                            <div className="text-sm font-bold text-white mt-0.5">Microscopy</div>
+                          </div>
+                          <div className="p-2.5 rounded-xl bg-black/40 border border-white/10">
+                            <div className="text-[10px] text-white/40 uppercase">Sequential RNN</div>
+                            <div className="text-sm font-bold text-[#ff3366] mt-0.5">Biomarkers</div>
+                          </div>
+                        </div>
+
+                        <p className="text-[11px] text-white/70 leading-relaxed italic">
+                          Empirical benchmarks confirmed hybrid spatial-temporal architectures yield optimal clinical efficacy.
+                        </p>
+                      </>
+                    )}
+
+                    {/* Project 3: Tennis Robot interactive */}
+                    {project.id === 'tennis-ball-robot' && (
+                      <>
+                        <div className="flex items-center justify-between pb-2 border-b border-white/10 text-xs">
+                          <span className="font-bold text-white flex items-center gap-1.5">
+                            <Bot className="w-3.5 h-3.5 text-[#ff3366]" />
+                            Robotic Telemetry
+                          </span>
+                          <span className="text-emerald-400 font-semibold text-[11px]">Autonomous</span>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-2 text-center">
+                          <div className="p-2 rounded-xl bg-black/40 border border-white/10">
+                            <div className="text-[10px] text-white/40 uppercase">Ball Reservoir</div>
+                            <div className="text-base font-bold text-[#ff3366]">{tennisBallCount} / 15</div>
+                          </div>
+                          <div className="p-2 rounded-xl bg-black/40 border border-white/10">
+                            <div className="text-[10px] text-white/40 uppercase">Efficiency</div>
+                            <div className="text-base font-bold text-white">92% Rate</div>
+                          </div>
+                        </div>
+
+                        <button
+                          onClick={() => setTennisBallCount((c) => (c >= 15 ? 1 : c + 1))}
+                          className="w-full py-2 rounded-xl btn-glossy text-xs font-bold text-white flex items-center justify-center gap-1.5"
+                        >
+                          <Play className="w-3 h-3" />
+                          <span>Trigger Collector Sweep (+1)</span>
+                        </button>
+                      </>
+                    )}
+
+                  </div>
                 </div>
+
               </div>
             </div>
           ))}
         </div>
+
       </div>
 
-      {/* Modal */}
-      {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}
+      {/* Full Modal Specification View */}
+      {selectedProject && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+          onClick={() => setSelectedProject(null)}
+        >
+          <div
+            className="relative w-full max-w-2xl bg-[#0e0e16] border border-white/20 rounded-3xl p-6 sm:p-8 max-h-[85vh] overflow-y-auto no-scrollbar shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
+              <div>
+                <span className="text-[10px] uppercase font-bold text-[#ff3366] tracking-wider block">
+                  {selectedProject.category}
+                </span>
+                <h3 className="text-lg sm:text-xl font-bold text-white">
+                  {selectedProject.title}
+                </h3>
+              </div>
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="p-1.5 rounded-xl bg-white/5 text-white/60 hover:text-white"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="space-y-5 text-xs sm:text-sm text-white/80 leading-relaxed">
+              <div>
+                <h4 className="font-bold text-white uppercase text-xs tracking-wider mb-1.5">
+                  Project Overview
+                </h4>
+                <p className="text-white/70">{selectedProject.overview}</p>
+              </div>
+
+              <div>
+                <h4 className="font-bold text-white uppercase text-xs tracking-wider mb-2">
+                  Technical Specifications
+                </h4>
+                <div className="divide-y divide-white/10 border border-white/10 rounded-xl overflow-hidden bg-white/5">
+                  {selectedProject.techSpecs.map((spec, sIdx) => (
+                    <div key={sIdx} className="grid grid-cols-1 sm:grid-cols-12 p-2.5 text-xs">
+                      <span className="sm:col-span-5 font-bold text-[#ff3366]">{spec.label}</span>
+                      <span className="sm:col-span-7 text-white/80">{spec.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

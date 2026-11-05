@@ -1,106 +1,68 @@
 import React, { useState, useEffect } from 'react';
+import { Sparkles } from 'lucide-react';
 
 export default function SplashScreen({ onFinish }) {
-  const [phase, setPhase] = useState(0); // 0=show, 1=hide
+  const [fading, setFading] = useState(false);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Animate progress bar
-    const dur = 2200;
+    const duration = 1600; // fast & responsive 1.6s
     const start = Date.now();
-    const tick = () => {
+    const interval = setInterval(() => {
       const elapsed = Date.now() - start;
-      const pct = Math.min((elapsed / dur) * 100, 100);
+      const pct = Math.min((elapsed / duration) * 100, 100);
       setProgress(pct);
-      if (pct < 100) requestAnimationFrame(tick);
-      else setTimeout(() => { setPhase(1); setTimeout(onFinish, 700); }, 200);
-    };
-    requestAnimationFrame(tick);
+      if (pct >= 100) {
+        clearInterval(interval);
+        setFading(true);
+        setTimeout(onFinish, 600);
+      }
+    }, 25);
+    return () => clearInterval(interval);
   }, [onFinish]);
 
   return (
     <div
-      className="splash-screen"
-      style={{
-        opacity: phase === 1 ? 0 : 1,
-        transition: 'opacity 0.7s ease',
-      }}
+      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#050507] transition-all duration-700 ${
+        fading ? 'opacity-0 pointer-events-none scale-105' : 'opacity-100'
+      }`}
     >
-      {/* Floating particles */}
-      {[...Array(12)].map((_, i) => (
-        <div
-          key={i}
-          className="particle"
-          style={{
-            left: `${10 + i * 7.5}%`,
-            bottom: '20%',
-            animationDuration: `${2.5 + (i % 4) * 0.7}s`,
-            animationDelay: `${i * 0.2}s`,
-            opacity: 0.4 + (i % 3) * 0.2,
-            width: i % 3 === 0 ? '4px' : '2px',
-            height: i % 3 === 0 ? '4px' : '2px',
-          }}
-        />
-      ))}
+      {/* Glossy crimson ambient background blobs */}
+      <div className="absolute w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-[#e60039]/20 blur-[100px] pointer-events-none animate-pulse-glow" />
+      <div className="absolute w-60 sm:w-80 h-60 sm:h-80 rounded-full bg-[#ff3366]/15 blur-[80px] pointer-events-none" />
 
-      {/* Center content */}
-      <div className="flex flex-col items-center gap-8 z-10">
-        {/* Monogram / Logo */}
-        <div
-          style={{
-            opacity: phase === 0 ? 1 : 0,
-            transform: phase === 0 ? 'scale(1)' : 'scale(0.8)',
-            transition: 'all 0.5s ease',
-          }}
-        >
-          <div className="relative flex items-center justify-center w-24 h-24">
-            {/* Rotating outer ring */}
-            <div
-              className="absolute inset-0 rounded-full border border-gold animate-spin-slow"
-              style={{ borderStyle: 'dashed', borderColor: 'rgba(201,168,76,0.4)' }}
-            />
-            {/* Inner ring */}
-            <div
-              className="absolute inset-2 rounded-full border border-gold"
-              style={{ borderColor: 'rgba(201,168,76,0.2)' }}
-            />
-            {/* Monogram */}
-            <span className="font-display text-3xl font-bold gold-text">H</span>
-          </div>
+      {/* Main Brand Card */}
+      <div className="relative z-10 flex flex-col items-center px-6 text-center max-w-sm sm:max-w-md">
+        
+        {/* Animated Gloss Emblem */}
+        <div className="relative flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 rounded-3xl glass-crimson mb-6 crimson-glow">
+          <div className="absolute inset-0 rounded-3xl border border-white/20" />
+          <span className="font-display text-3xl sm:text-4xl font-black text-white tracking-wider">
+            H
+          </span>
+          <span className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-[#ff3366] shadow-[0_0_12px_#ff3366] animate-ping" />
         </div>
 
-        {/* Name */}
-        <div className="text-center space-y-2">
-          <h1
-            className="font-display text-4xl sm:text-5xl font-bold tracking-wide"
-            style={{ color: '#e8e0d4', letterSpacing: '0.08em' }}
-          >
-            HARSHAVARDHAN
-          </h1>
-          <p
-            className="font-elegant text-lg italic"
-            style={{ color: 'rgba(201,168,76,0.8)', letterSpacing: '0.3em', fontSize: '0.9rem' }}
-          >
-            Electronics & Communication Engineer
-          </p>
+        {/* Title */}
+        <h1 className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-1.5">
+          HARSHAVARDHAN
+        </h1>
+        <p className="text-xs sm:text-sm text-white/60 font-medium tracking-widest uppercase mb-8 flex items-center gap-1.5">
+          <Sparkles className="w-3.5 h-3.5 text-[#ff3366]" />
+          ECE • IoT • AI Research
+        </p>
+
+        {/* Progress Bar with Glossy Finish */}
+        <div className="w-48 sm:w-64 h-1.5 bg-white/10 rounded-full overflow-hidden p-0.5 border border-white/10 shadow-inner">
+          <div
+            className="h-full rounded-full bg-gradient-to-r from-[#e60039] via-[#ff3366] to-white transition-all duration-75 shadow-[0_0_15px_#e60039]"
+            style={{ width: `${progress}%` }}
+          />
         </div>
 
-        {/* Progress bar */}
-        <div className="w-64 sm:w-80">
-          <div className="h-px bg-white/10 rounded-full overflow-hidden">
-            <div
-              className="h-full rounded-full transition-all duration-100"
-              style={{
-                width: `${progress}%`,
-                background: 'linear-gradient(90deg, #c9a84c, #f5d78e)',
-              }}
-            />
-          </div>
-          <div className="flex justify-between mt-2 font-body text-xs" style={{ color: 'rgba(201,168,76,0.5)' }}>
-            <span>Loading Portfolio</span>
-            <span>{Math.round(progress)}%</span>
-          </div>
-        </div>
+        <span className="mt-3 text-[11px] font-mono text-white/40 tracking-wider">
+          {Math.round(progress)}%
+        </span>
       </div>
     </div>
   );

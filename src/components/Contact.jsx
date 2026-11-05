@@ -1,203 +1,209 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Copy, Check, Send } from 'lucide-react';
-import { SectionHeader } from './About';
+import { Mail, MapPin, Send, Copy, Check, MessageSquare, FileDown } from 'lucide-react';
+import { portfolioData } from '../data/portfolioData';
 
 export default function Contact({ onOpenResume }) {
+  const { personal } = portfolioData;
   const [copied, setCopied] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
-  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
-
-  const email = 'harshavardhan9@gmail.com';
+  const [status, setStatus] = useState('idle'); // idle | loading | success
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(email);
+    navigator.clipboard.writeText(personal.email);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+    setTimeout(() => setCopied(false), 2200);
   };
-
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
-      setStatus('error');
-      return;
-    }
-    setStatus('sending');
+    if (!form.name || !form.email || !form.message) return;
+    setStatus('loading');
     setTimeout(() => {
-      setStatus('sent');
+      setStatus('success');
       setForm({ name: '', email: '', subject: '', message: '' });
-    }, 1200);
+      setTimeout(() => setStatus('idle'), 4000);
+    }, 1000);
   };
 
   return (
-    <section id="contact" className="py-24 sm:py-32" style={{ background: '#0f0f0f' }}>
-      <div className="max-w-6xl mx-auto px-6 sm:px-10">
-        <SectionHeader
-          eyebrow="Get in Touch"
-          title="Contact"
-          subtitle="Open to opportunities, collaborations, and conversations"
-        />
+    <section id="contact" className="py-16 sm:py-24 relative border-t border-white/5 bg-[#07070b]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16 space-y-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#e60039]/10 border border-[#e60039]/30 text-xs font-bold text-[#ff3366] tracking-wider uppercase">
+            <Mail className="w-3.5 h-3.5" />
+            <span>Get In Touch</span>
+          </div>
+          <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-white">
+            Connect & Collaborate
+          </h2>
+          <p className="text-xs sm:text-sm text-white/60">
+            Open for full-time engineering positions, embedded projects, and innovative teams
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
-
-          {/* Left info panel */}
-          <div className="lg:col-span-2 space-y-8 reveal-left">
-
-            <div>
-              <p className="font-body text-sm leading-relaxed" style={{ color: 'rgba(232,224,212,0.6)', lineHeight: '1.9' }}>
-                I am actively seeking graduate engineering roles in embedded systems, IoT, and AI-driven product development. If you are hiring or have an interesting project, I would love to hear from you.
-              </p>
-            </div>
-
-            {/* Email card */}
-            <div
-              className="p-5 rounded-sm card-glow"
-              style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.07)' }}
-            >
-              <div className="flex items-center gap-2 mb-3">
-                <Mail size={14} style={{ color: '#c9a84c' }} />
-                <span className="font-body text-xs tracking-widest uppercase" style={{ color: 'rgba(201,168,76,0.6)', letterSpacing: '0.12em' }}>
-                  Direct Email
+        {/* Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* Left Column: Direct Info & Location Cards */}
+          <div className="lg:col-span-5 space-y-4">
+            
+            {/* Email Card with 1-click copy */}
+            <div className="glass-panel p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-white/10 space-y-3">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#ff3366] block">
+                Direct Communication
+              </span>
+              <div className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10">
+                <span className="text-xs sm:text-sm font-mono text-white/90 truncate mr-2">
+                  {personal.email}
                 </span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="font-body text-sm break-all" style={{ color: 'rgba(232,224,212,0.75)' }}>{email}</span>
                 <button
                   onClick={handleCopy}
-                  className="ml-3 flex-shrink-0 p-1.5 transition-colors"
-                  style={{ color: copied ? '#c9a84c' : 'rgba(232,224,212,0.3)' }}
+                  className="p-2 rounded-lg bg-[#e60039]/20 hover:bg-[#e60039]/40 text-[#ff3366] transition-colors flex-shrink-0"
                   title="Copy email"
                 >
-                  {copied ? <Check size={15} /> : <Copy size={15} />}
+                  {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
                 </button>
               </div>
               {copied && (
-                <p className="font-body text-xs mt-2" style={{ color: 'rgba(201,168,76,0.6)' }}>
-                  Copied to clipboard
+                <p className="text-[11px] text-emerald-400 font-semibold">
+                  Email copied to clipboard!
                 </p>
               )}
             </div>
 
-            {/* Location */}
-            <div
-              className="p-5 rounded-sm card-glow"
-              style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.07)' }}
-            >
-              <div className="flex items-center gap-2 mb-2">
-                <MapPin size={14} style={{ color: '#c9a84c' }} />
-                <span className="font-body text-xs tracking-widest uppercase" style={{ color: 'rgba(201,168,76,0.6)', letterSpacing: '0.12em' }}>
-                  Location
-                </span>
+            {/* Geographical Base */}
+            <div className="glass-panel p-5 rounded-2xl sm:rounded-3xl border border-white/10 space-y-3">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-white/60 block">
+                Primary Presence
+              </span>
+              <div className="space-y-2 text-xs">
+                <div className="flex items-start gap-2.5 p-3 rounded-xl bg-white/5">
+                  <MapPin className="w-4 h-4 text-[#ff3366] flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-white block">Saveetha School of Engineering</span>
+                    <span className="text-white/50">Chennai, Tamil Nadu</span>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2.5 p-3 rounded-xl bg-white/5">
+                  <MapPin className="w-4 h-4 text-white/40 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-white block">Home Base</span>
+                    <span className="text-white/50">Tirupathi / Renigunta, Andhra Pradesh</span>
+                  </div>
+                </div>
               </div>
-              <p className="font-body text-sm" style={{ color: 'rgba(232,224,212,0.65)' }}>
-                Chennai, Tamil Nadu (Academic Base)<br />
-                Tirupathi / Renigunta, Andhra Pradesh
-              </p>
             </div>
 
-            {/* Resume CTA */}
-            <button
-              onClick={onOpenResume}
-              className="btn-primary w-full py-3 font-body text-sm tracking-widest uppercase text-center"
-              style={{ letterSpacing: '0.12em' }}
-            >
-              View Resume
-            </button>
+            {/* Resume Callout */}
+            <div className="glass-crimson p-5 rounded-2xl sm:rounded-3xl border border-[#e60039]/40 space-y-2.5">
+              <span className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+                <FileDown className="w-4 h-4 text-[#ff3366]" />
+                Curriculum Vitae
+              </span>
+              <p className="text-xs text-white/70">
+                View my comprehensive credentials, academic grades, and complete project breakdowns.
+              </p>
+              <button
+                onClick={onOpenResume}
+                className="w-full py-2.5 rounded-xl btn-glossy text-xs font-bold text-white text-center"
+              >
+                View & Print Official Resume
+              </button>
+            </div>
+
           </div>
 
-          {/* Right form */}
-          <form
-            onSubmit={handleSubmit}
-            className="lg:col-span-3 reveal-right space-y-5"
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {[
-                { name: 'name', placeholder: 'Your name', label: 'Name *' },
-                { name: 'email', placeholder: 'your@email.com', label: 'Email *', type: 'email' },
-              ].map(({ name, placeholder, label, type }) => (
-                <div key={name}>
-                  <label className="block font-body text-xs tracking-widest uppercase mb-2" style={{ color: 'rgba(232,224,212,0.4)', letterSpacing: '0.1em' }}>
-                    {label}
+          {/* Right Column: Contact Message Form */}
+          <div className="lg:col-span-7">
+            <div className="glass-panel p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/10">
+              <h3 className="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                <MessageSquare className="w-4 h-4 text-[#ff3366]" />
+                Send a Message
+              </h3>
+              <p className="text-xs text-white/50 mb-6">
+                Have a job opportunity or question? Leave a note and I will get back to you promptly.
+              </p>
+
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs font-semibold text-white/70 block mb-1.5">
+                      Your Name *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      placeholder="e.g. Harsha"
+                      className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs sm:text-sm focus:border-[#ff3366] focus:outline-none transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-white/70 block mb-1.5">
+                      Your Email *
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      placeholder="e.g. name@gmail.com"
+                      className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs sm:text-sm focus:border-[#ff3366] focus:outline-none transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-xs font-semibold text-white/70 block mb-1.5">
+                    Subject
                   </label>
                   <input
-                    type={type || 'text'}
-                    name={name}
-                    value={form[name]}
-                    onChange={handleChange}
-                    placeholder={placeholder}
-                    className="w-full bg-transparent font-body text-sm px-4 py-3 outline-none transition-all duration-300"
-                    style={{
-                      color: '#e8e0d4',
-                      border: '1px solid rgba(255,255,255,0.08)',
-                      borderRadius: '2px',
-                      background: 'rgba(255,255,255,0.025)',
-                    }}
-                    onFocus={(e) => { e.target.style.borderColor = 'rgba(201,168,76,0.4)'; }}
-                    onBlur={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.08)'; }}
+                    type="text"
+                    value={form.subject}
+                    onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                    placeholder="e.g. ECE Role / Project Collaboration"
+                    className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs sm:text-sm focus:border-[#ff3366] focus:outline-none transition-colors"
                   />
                 </div>
-              ))}
+
+                <div>
+                  <label className="text-xs font-semibold text-white/70 block mb-1.5">
+                    Message *
+                  </label>
+                  <textarea
+                    rows={4}
+                    required
+                    value={form.message}
+                    onChange={(e) => setForm({ ...form, message: e.target.value })}
+                    placeholder="Write your note here..."
+                    className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs sm:text-sm focus:border-[#ff3366] focus:outline-none transition-colors resize-none"
+                  />
+                </div>
+
+                {status === 'success' && (
+                  <p className="p-3 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-xs font-semibold">
+                    Message sent successfully! Thank you for reaching out.
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="w-full py-3 rounded-xl btn-glossy text-xs sm:text-sm font-bold text-white flex items-center justify-center gap-2"
+                >
+                  <Send className="w-4 h-4" />
+                  <span>{status === 'loading' ? 'Sending...' : 'Dispatch Message'}</span>
+                </button>
+              </form>
+
             </div>
-
-            <div>
-              <label className="block font-body text-xs tracking-widest uppercase mb-2" style={{ color: 'rgba(232,224,212,0.4)', letterSpacing: '0.1em' }}>
-                Subject
-              </label>
-              <input
-                type="text"
-                name="subject"
-                value={form.subject}
-                onChange={handleChange}
-                placeholder="Project collaboration / Hiring enquiry…"
-                className="w-full bg-transparent font-body text-sm px-4 py-3 outline-none transition-all duration-300"
-                style={{ color: '#e8e0d4', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '2px', background: 'rgba(255,255,255,0.025)' }}
-                onFocus={(e) => { e.target.style.borderColor = 'rgba(201,168,76,0.4)'; }}
-                onBlur={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.08)'; }}
-              />
-            </div>
-
-            <div>
-              <label className="block font-body text-xs tracking-widest uppercase mb-2" style={{ color: 'rgba(232,224,212,0.4)', letterSpacing: '0.1em' }}>
-                Message *
-              </label>
-              <textarea
-                rows={6}
-                name="message"
-                value={form.message}
-                onChange={handleChange}
-                placeholder="Tell me about your project or opportunity…"
-                className="w-full bg-transparent font-body text-sm px-4 py-3 outline-none transition-all duration-300 resize-none"
-                style={{ color: '#e8e0d4', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '2px', background: 'rgba(255,255,255,0.025)' }}
-                onFocus={(e) => { e.target.style.borderColor = 'rgba(201,168,76,0.4)'; }}
-                onBlur={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.08)'; }}
-              />
-            </div>
-
-            {status === 'error' && (
-              <p className="font-body text-xs" style={{ color: '#e57373' }}>
-                Please fill in all required fields.
-              </p>
-            )}
-
-            {status === 'sent' && (
-              <p className="font-body text-xs" style={{ color: '#c9a84c' }}>
-                Message sent! I will get back to you soon.
-              </p>
-            )}
-
-            <button
-              type="submit"
-              disabled={status === 'sending'}
-              className="btn-primary flex items-center gap-3 px-8 py-3 font-body text-sm tracking-widest uppercase"
-              style={{ letterSpacing: '0.12em', opacity: status === 'sending' ? 0.6 : 1 }}
-            >
-              <Send size={14} />
-              <span>{status === 'sending' ? 'Sending…' : 'Send Message'}</span>
-            </button>
-          </form>
+          </div>
 
         </div>
+
       </div>
     </section>
   );

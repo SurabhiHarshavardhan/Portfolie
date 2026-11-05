@@ -8,46 +8,39 @@ export default {
   theme: {
     extend: {
       colors: {
-        gold: {
-          light: '#f5d78e',
-          DEFAULT: '#c9a84c',
-          dark: '#9e7c2f',
+        crimson: {
+          light: '#ff3366',
+          DEFAULT: '#e60039',
+          dark: '#990026',
+          glow: 'rgba(230, 0, 57, 0.45)',
+          deep: '#4d0013',
         },
-        parchment: '#e8e0d4',
-        charcoal: '#1a1a1a',
-        ink: '#0d0d0d',
-        muted: '#8a8070',
+        obsidian: {
+          950: '#050507',
+          900: '#0a0a0f',
+          850: '#101017',
+          800: '#161622',
+        }
       },
       fontFamily: {
-        display: ['Playfair Display', 'serif'],
-        elegant: ['Cormorant Garamond', 'serif'],
-        body: ['Inter', 'sans-serif'],
+        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+        display: ['Outfit', 'Cabinet Grotesk', 'sans-serif'],
       },
       animation: {
-        'fade-in': 'fadeIn 1s ease forwards',
-        'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-        'float': 'floatBob 6s ease-in-out infinite',
-        'spin-slow': 'spin 25s linear infinite',
-        'pulse-gold': 'pulseGold 2.5s ease-in-out infinite',
+        'float-slow': 'floatSlow 5s ease-in-out infinite',
+        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+        'spin-crimson': 'spin 18s linear infinite',
       },
       keyframes: {
-        fadeIn: {
-          '0%': { opacity: 0 },
-          '100%': { opacity: 1 },
-        },
-        slideUp: {
-          '0%': { opacity: 0, transform: 'translateY(30px)' },
-          '100%': { opacity: 1, transform: 'translateY(0)' },
-        },
-        floatBob: {
+        floatSlow: {
           '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-12px)' },
+          '50%': { transform: 'translateY(-10px)' },
         },
-        pulseGold: {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(201, 168, 76, 0.2)' },
-          '50%': { boxShadow: '0 0 50px rgba(201, 168, 76, 0.5)' },
-        },
-      },
+        pulseGlow: {
+          '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+          '50%': { opacity: '0.8', transform: 'scale(1.05)' },
+        }
+      }
     },
   },
   plugins: [],

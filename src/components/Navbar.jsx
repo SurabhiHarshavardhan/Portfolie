@@ -1,123 +1,138 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, FileText } from 'lucide-react';
-
-const links = [
-  { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Education', href: '#education' },
-  { name: 'Contact', href: '#contact' },
-];
+import { Menu, X, FileText, Send, Sparkles } from 'lucide-react';
 
 export default function Navbar({ onOpenResume }) {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 60);
-
-      // Active section tracking
-      const sections = ['about', 'skills', 'projects', 'education', 'contact'];
-      for (const id of [...sections].reverse()) {
-        const el = document.getElementById(id);
-        if (el && window.scrollY >= el.offsetTop - 120) {
-          setActiveSection(id);
-          break;
-        }
-      }
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 25);
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const links = [
+    { name: 'About', href: '#about' },
+    { name: 'Skills', href: '#skills' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Education', href: '#education' },
+    { name: 'Contact', href: '#contact' },
+  ];
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
-      style={{
-        background: scrolled ? 'rgba(13,13,13,0.92)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(201,168,76,0.12)' : 'none',
-        padding: scrolled ? '14px 0' : '24px 0',
-      }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-[#050507]/80 backdrop-blur-xl border-b border-white/10 py-3 shadow-2xl shadow-black/80'
+          : 'bg-transparent py-4 sm:py-5'
+      }`}
     >
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 flex items-center justify-between">
-        {/* Brand */}
-        <a
-          href="#"
-          className="font-display text-lg font-semibold tracking-widest transition-colors duration-300"
-          style={{ color: '#c9a84c', letterSpacing: '0.15em' }}
-        >
-          HARSHA
-        </a>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
+          
+          {/* Brand Logo with Glossy Crimson Dot */}
+          <a href="#" className="flex items-center gap-2.5 group">
+            <div className="w-8 h-8 rounded-xl glass-crimson flex items-center justify-center font-display font-black text-white text-base shadow-[0_0_15px_rgba(230,0,57,0.4)] group-hover:scale-105 transition-transform">
+              H
+            </div>
+            <div className="flex flex-col">
+              <span className="font-display font-extrabold text-white text-sm sm:text-base tracking-wider leading-none group-hover:text-[#ff3366] transition-colors">
+                HARSHAVARDHAN
+              </span>
+              <span className="text-[10px] text-white/50 tracking-widest uppercase mt-0.5 font-medium">
+                ECE Innovator
+              </span>
+            </div>
+          </a>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {links.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className={`nav-link font-body text-xs tracking-widest uppercase transition-colors duration-300 ${
-                activeSection === link.href.slice(1) ? 'active' : ''
-              }`}
-              style={{
-                color: activeSection === link.href.slice(1)
-                  ? '#c9a84c'
-                  : 'rgba(232,224,212,0.65)',
-                letterSpacing: '0.12em',
-              }}
+          {/* Desktop Nav Items */}
+          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+            {links.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white/70 hover:text-white hover:bg-white/5 transition-all"
+              >
+                {link.name}
+              </a>
+            ))}
+          </nav>
+
+          {/* Right Action buttons */}
+          <div className="hidden sm:flex items-center gap-3">
+            <button
+              onClick={onOpenResume}
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold text-white/80 bg-white/5 hover:bg-white/10 border border-white/10 transition-all"
             >
-              {link.name}
-            </a>
-          ))}
-          <button
-            onClick={onOpenResume}
-            className="btn-primary font-body text-xs px-5 py-2 tracking-widest uppercase"
-            style={{ letterSpacing: '0.12em' }}
-          >
-            Resume
-          </button>
-        </nav>
-
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden p-2 transition-colors"
-          style={{ color: '#c9a84c' }}
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {menuOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      <div
-        className="md:hidden overflow-hidden transition-all duration-500"
-        style={{
-          maxHeight: menuOpen ? '400px' : '0',
-          background: 'rgba(13,13,13,0.97)',
-          borderBottom: menuOpen ? '1px solid rgba(201,168,76,0.12)' : 'none',
-        }}
-      >
-        <div className="flex flex-col px-6 py-6 gap-5">
-          {links.map((link) => (
+              <FileText className="w-3.5 h-3.5 text-[#ff3366]" />
+              <span>Resume</span>
+            </button>
             <a
-              key={link.name}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-              className="font-body text-sm tracking-widest uppercase"
-              style={{ color: 'rgba(232,224,212,0.75)', letterSpacing: '0.12em' }}
+              href="#contact"
+              className="btn-glossy flex items-center gap-1.5 px-4 py-1.5 rounded-xl text-xs font-bold text-white tracking-wide"
             >
-              {link.name}
+              <Send className="w-3.5 h-3.5" />
+              <span>Contact</span>
             </a>
-          ))}
-          <button
-            onClick={() => { setMenuOpen(false); onOpenResume(); }}
-            className="btn-primary font-body text-xs px-5 py-2.5 tracking-widest uppercase text-left w-fit"
-          >
-            Resume
-          </button>
+          </div>
+
+          {/* Mobile hamburger menu */}
+          <div className="flex md:hidden items-center gap-2">
+            <button
+              onClick={onOpenResume}
+              className="px-2.5 py-1 rounded-lg text-xs font-bold text-[#ff3366] bg-[#e60039]/15 border border-[#e60039]/30"
+            >
+              CV
+            </button>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-xl bg-white/5 text-white/80 hover:text-white border border-white/10"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+
         </div>
+
+        {/* Mobile dropdown */}
+        {mobileMenuOpen && (
+          <div className="md:hidden mt-3 p-4 rounded-2xl glass-panel border border-white/15 shadow-2xl animate-in slide-in-from-top-2">
+            <div className="flex flex-col gap-2">
+              {links.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-3 py-2 rounded-xl text-sm font-semibold text-white/80 hover:text-white hover:bg-[#e60039]/15"
+                >
+                  {link.name}
+                </a>
+              ))}
+              <div className="pt-2 border-t border-white/10 flex gap-2">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenResume();
+                  }}
+                  className="flex-1 py-2.5 rounded-xl bg-white/5 text-xs font-semibold text-white text-center border border-white/10"
+                >
+                  View Resume
+                </button>
+                <a
+                  href="#contact"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex-1 py-2.5 rounded-xl btn-glossy text-xs font-bold text-white text-center"
+                >
+                  Contact Me
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+
       </div>
     </header>
   );

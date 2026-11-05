@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SplashScreen from './components/SplashScreen';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -11,46 +11,29 @@ import Footer from './components/Footer';
 import ResumeModal from './components/ResumeModal';
 import useScrollReveal from './hooks/useScrollReveal';
 
-// Cursor glow component
-function CursorGlow() {
-  const [pos, setPos] = useState({ x: -400, y: -400 });
-  useEffect(() => {
-    const move = (e) => setPos({ x: e.clientX, y: e.clientY });
-    window.addEventListener('mousemove', move);
-    return () => window.removeEventListener('mousemove', move);
-  }, []);
-  return (
-    <div
-      className="cursor-glow"
-      style={{ left: pos.x, top: pos.y, pointerEvents: 'none' }}
-    />
-  );
-}
-
 export default function App() {
-  const [splashDone, setSplashDone] = useState(false);
+  const [splashFinished, setSplashFinished] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
 
   useScrollReveal();
 
   return (
-    <>
-      {/* Splash Screen */}
-      {!splashDone && <SplashScreen onFinish={() => setSplashDone(true)} />}
+    <div className="min-h-screen bg-[#050507] text-[#f2f2f7] relative selection:bg-[#e60039]/30 selection:text-white overflow-x-hidden no-scrollbar">
+      
+      {/* ──── SPLASH SCREEN ──── */}
+      {!splashFinished && (
+        <SplashScreen onFinish={() => setSplashFinished(true)} />
+      )}
 
-      {/* Main portfolio (always rendered, hidden by splash overlay) */}
+      {/* ──── MAIN PORTFOLIO PAGE ──── */}
       <div
-        style={{
-          opacity: splashDone ? 1 : 0,
-          transition: 'opacity 0.6s ease',
-          pointerEvents: splashDone ? 'auto' : 'none',
-          background: '#0d0d0d',
-          minHeight: '100vh',
-        }}
+        className={`transition-opacity duration-700 ${
+          splashFinished ? 'opacity-100' : 'opacity-0'
+        }`}
       >
-        <CursorGlow />
         <Navbar onOpenResume={() => setResumeOpen(true)} />
-        <main>
+
+        <main className="relative z-10 space-y-4">
           <Hero onOpenResume={() => setResumeOpen(true)} />
           <About />
           <Skills />
@@ -58,9 +41,15 @@ export default function App() {
           <Education />
           <Contact onOpenResume={() => setResumeOpen(true)} />
         </main>
+
         <Footer />
-        <ResumeModal isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
+
+        <ResumeModal
+          isOpen={resumeOpen}
+          onClose={() => setResumeOpen(false)}
+        />
       </div>
-    </>
+
+    </div>
   );
 }

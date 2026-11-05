@@ -1,122 +1,122 @@
 import React from 'react';
-import { MapPin, GraduationCap, Languages, Zap } from 'lucide-react';
-import profilePhoto from '../image/Harshavardhan.jpeg';
-
-const interests = [
-  { title: 'Internet of Things (IoT)', desc: 'Smart sensor networks, MQTT protocols, edge analytics, and cloud data pipelines.' },
-  { title: 'Embedded Systems', desc: 'Microcontroller architecture, sensor interfacing, and low-level C programming.' },
-  { title: 'Robotics & Automation', desc: 'Sensor fusion, motor actuation, and autonomous navigation algorithms.' },
-  { title: 'AI & Medical Imaging', desc: 'CNN/RNN models for clinical microscopy and automated disease diagnostics.' },
-];
-
-function SectionHeader({ eyebrow, title, subtitle }) {
-  return (
-    <div className="mb-14 reveal">
-      <div className="flex items-center gap-3 mb-4">
-        <div className="w-6 h-px" style={{ background: '#c9a84c' }} />
-        <span className="font-body text-xs tracking-widest uppercase" style={{ color: '#c9a84c', letterSpacing: '0.2em' }}>
-          {eyebrow}
-        </span>
-      </div>
-      <h2 className="font-display text-3xl sm:text-4xl font-bold mb-3" style={{ color: '#e8e0d4' }}>
-        {title}
-      </h2>
-      {subtitle && (
-        <p className="font-elegant text-lg italic" style={{ color: 'rgba(232,224,212,0.5)' }}>
-          {subtitle}
-        </p>
-      )}
-      <div className="mt-5 divider" style={{ maxWidth: '80px' }} />
-    </div>
-  );
-}
+import { Target, Cpu, Wifi, Bot, Brain, GraduationCap, MapPin, CheckCircle2, Zap } from 'lucide-react';
+import { portfolioData } from '../data/portfolioData';
 
 export default function About() {
+  const { personal, areasOfInterest } = portfolioData;
+
+  const iconMap = {
+    Wifi: Wifi,
+    CircuitBoard: Cpu,
+    Bot: Bot,
+    Brain: Brain,
+  };
+
   return (
-    <section id="about" className="py-24 sm:py-32" style={{ background: '#0f0f0f' }}>
-      <div className="max-w-6xl mx-auto px-6 sm:px-10">
-        <SectionHeader
-          eyebrow="Who I Am"
-          title="About Me"
-          subtitle="Engineering intelligence, one circuit at a time"
-        />
+    <section id="about" className="py-16 sm:py-24 relative border-t border-white/5 bg-[#07070b]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16 space-y-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#e60039]/10 border border-[#e60039]/30 text-xs font-bold text-[#ff3366] tracking-wider uppercase">
+            <Target className="w-3.5 h-3.5" />
+            <span>Profile & Background</span>
+          </div>
+          <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-white">
+            Engineering Journey & Objective
+          </h2>
+          <p className="text-xs sm:text-sm text-white/60">
+            Harmonizing digital hardware circuits with advanced machine learning
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        {/* Responsive Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* Main Professional Bio Column */}
+          <div className="lg:col-span-7 space-y-5">
+            <div className="glass-panel p-5 sm:p-7 rounded-2xl sm:rounded-3xl border border-white/10 space-y-4">
+              <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#ff3366]" />
+                Professional Summary
+              </h3>
 
-          {/* Bio Column */}
-          <div className="lg:col-span-7 space-y-8">
-            <div className="reveal space-y-5">
-              <p className="font-body text-base leading-relaxed" style={{ color: 'rgba(232,224,212,0.7)', lineHeight: '1.9' }}>
-                I am <strong style={{ color: '#e8e0d4' }}>Surabhi Kamesh Sri Surya Harshavardhan</strong>, an Electronics and Communication Engineering graduate from Saveetha School of Engineering, Chennai. My academic journey has equipped me with deep expertise in digital electronics, signal processing, and embedded system design.
-              </p>
-              <p className="font-body text-base leading-relaxed" style={{ color: 'rgba(232,224,212,0.7)', lineHeight: '1.9' }}>
-                Proficient in <span style={{ color: '#c9a84c' }}>C and Python</span>, I have channelled my skills into building real-world applications — from AI-powered malaria diagnostic systems achieving <span style={{ color: '#c9a84c' }}>96.4% classification accuracy</span> to autonomous tennis ball-collecting robots that merge embedded hardware with intelligent control.
-              </p>
-              <p className="font-body text-base leading-relaxed" style={{ color: 'rgba(232,224,212,0.7)', lineHeight: '1.9' }}>
-                I am passionate about architecting elegant hardware–software integrated solutions and eager to contribute to growth-oriented organisations pushing the frontier of engineering.
-              </p>
-            </div>
+              <div className="space-y-3 text-white/75 text-xs sm:text-sm leading-relaxed">
+                <p>
+                  I am <strong className="text-white font-semibold">{personal.fullName}</strong>, an Electronics and Communication Engineering (ECE) graduate from Saveetha School of Engineering Chennai with strong fundamentals in digital electronics, signal processing, and embedded systems.
+                </p>
+                <p>
+                  Proficient in <span className="text-[#ff3366] font-semibold">C and Python programming</span>, with practical knowledge of IoT and embedded application development through academic and personal projects. Passionate about developing efficient hardware-software integrated solutions and exploring real-world engineering applications.
+                </p>
+                <p>
+                  Eager to apply technical skills, learn new technologies, and contribute to innovative projects in a growth-oriented organization.
+                </p>
+              </div>
 
-            {/* Quick Facts Grid */}
-            <div className="reveal delay-200 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                { icon: GraduationCap, label: 'Institution', val: 'Saveetha School of Engineering' },
-                { icon: MapPin, label: 'Location', val: 'Chennai, TN & Tirupathi, AP' },
-                { icon: Zap, label: 'Focus Area', val: 'Hardware + AI Integration' },
-                { icon: Languages, label: 'Languages', val: 'Telugu, English, Hindi, Tamil' },
-              ].map(({ icon: Icon, label, val }) => (
-                <div
-                  key={label}
-                  className="flex items-start gap-3 p-4 rounded-sm card-glow"
-                  style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.06)' }}
-                >
-                  <Icon size={15} style={{ color: '#c9a84c', marginTop: 2, flexShrink: 0 }} />
-                  <div>
-                    <p className="font-body text-xs uppercase tracking-wider mb-1" style={{ color: 'rgba(201,168,76,0.6)', letterSpacing: '0.1em' }}>{label}</p>
-                    <p className="font-body text-sm" style={{ color: 'rgba(232,224,212,0.8)' }}>{val}</p>
-                  </div>
+              {/* Fast Facts Badge Grid */}
+              <div className="pt-4 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/5 border border-white/5">
+                  <GraduationCap className="w-4 h-4 text-[#ff3366] flex-shrink-0" />
+                  <span className="text-white/80">Saveetha School of Engg (2022–2026)</span>
                 </div>
-              ))}
+                <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/5 border border-white/5">
+                  <MapPin className="w-4 h-4 text-[#ff3366] flex-shrink-0" />
+                  <span className="text-white/80">Chennai, TN & Tirupathi, AP</span>
+                </div>
+                <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/5 border border-white/5">
+                  <Zap className="w-4 h-4 text-[#ff3366] flex-shrink-0" />
+                  <span className="text-white/80">IoT & Embedded Hardware</span>
+                </div>
+                <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/5 border border-white/5">
+                  <CheckCircle2 className="w-4 h-4 text-[#ff3366] flex-shrink-0" />
+                  <span className="text-white/80">B.Tech CGPA: 7.38 / 10.0</span>
+                </div>
+              </div>
             </div>
 
-            {/* Career objective */}
-            <div
-              className="reveal delay-300 p-5 rounded-sm"
-              style={{
-                background: 'rgba(201,168,76,0.05)',
-                borderLeft: '2px solid rgba(201,168,76,0.4)',
-              }}
-            >
-              <p className="font-elegant text-base italic" style={{ color: 'rgba(232,224,212,0.65)', lineHeight: '1.8' }}>
-                "Eager to apply technical skills in embedded systems and machine learning, continuously learn evolving technologies, and contribute meaningfully to high-impact engineering projects."
-              </p>
+            {/* Objective Banner */}
+            <div className="p-4 sm:p-5 rounded-2xl glass-crimson border border-[#e60039]/30 text-white/90 text-xs sm:text-sm leading-relaxed">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-[#ff3366] block mb-1">
+                Career Objective
+              </span>
+              Eager to apply technical skills, learn new technologies, and contribute to innovative projects in a growth-oriented organization.
             </div>
           </div>
 
-          {/* Interests Column */}
-          <div className="lg:col-span-5 space-y-4">
-            <h3 className="reveal font-body text-xs tracking-widest uppercase mb-6" style={{ color: 'rgba(201,168,76,0.7)', letterSpacing: '0.15em' }}>
-              Areas of Specialisation
+          {/* Right Column: Focus Areas (Adaptive Layout) */}
+          <div className="lg:col-span-5 space-y-3.5">
+            <h3 className="text-xs uppercase font-bold text-white/50 tracking-widest pl-1">
+              Areas of Specialization
             </h3>
-            {interests.map((item, i) => (
-              <div
-                key={item.title}
-                className={`reveal delay-${(i + 1) * 100} hover-lift card-glow p-5 rounded-sm cursor-default`}
-                style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.06)' }}
-              >
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#c9a84c' }} />
-                  <h4 className="font-body text-sm font-semibold" style={{ color: '#e8e0d4' }}>{item.title}</h4>
-                </div>
-                <p className="font-body text-xs leading-relaxed pl-4" style={{ color: 'rgba(232,224,212,0.5)', lineHeight: '1.7' }}>{item.desc}</p>
-              </div>
-            ))}
+
+            <div className="grid grid-cols-1 gap-3">
+              {areasOfInterest.map((item, idx) => {
+                const IconComponent = iconMap[item.icon] || Cpu;
+                return (
+                  <div
+                    key={idx}
+                    className="glass-card p-4 rounded-2xl border border-white/5 flex items-start gap-3.5"
+                  >
+                    <div className="p-2.5 rounded-xl bg-[#e60039]/15 border border-[#e60039]/30 text-[#ff3366] flex-shrink-0">
+                      <IconComponent className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs sm:text-sm font-bold text-white">
+                        {item.title}
+                      </h4>
+                      <p className="text-[11px] sm:text-xs text-white/60 leading-relaxed mt-0.5">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
         </div>
+
       </div>
     </section>
   );
 }
-
-export { SectionHeader };
