@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SplashScreen from './components/SplashScreen';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -11,6 +11,22 @@ import Footer from './components/Footer';
 import ResumeModal from './components/ResumeModal';
 import useScrollReveal from './hooks/useScrollReveal';
 
+// Smooth interactive cursor ambient spotlight
+function AmbientMouseSpotlight() {
+  const [pos, setPos] = useState({ x: -600, y: -600 });
+  useEffect(() => {
+    const handleMove = (e) => setPos({ x: e.clientX, y: e.clientY });
+    window.addEventListener('mousemove', handleMove, { passive: true });
+    return () => window.removeEventListener('mousemove', handleMove);
+  }, []);
+  return (
+    <div
+      className="cursor-ambient-glow hidden md:block"
+      style={{ left: `${pos.x}px`, top: `${pos.y}px` }}
+    />
+  );
+}
+
 export default function App() {
   const [splashFinished, setSplashFinished] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
@@ -18,9 +34,12 @@ export default function App() {
   useScrollReveal();
 
   return (
-    <div className="min-h-screen bg-[#050507] text-[#f2f2f7] relative selection:bg-[#e60039]/30 selection:text-white overflow-x-hidden no-scrollbar">
+    <div className="min-h-screen bg-[#030308] text-[#f3f3f8] relative selection:bg-purple-500/30 selection:text-white overflow-x-hidden no-scrollbar">
       
-      {/* ──── SPLASH SCREEN ──── */}
+      {/* ──── INTERACTIVE MOUSE AMBIENT GLOW ──── */}
+      <AmbientMouseSpotlight />
+
+      {/* ──── ATTRACTIVE SPLASH SCREEN ──── */}
       {!splashFinished && (
         <SplashScreen onFinish={() => setSplashFinished(true)} />
       )}

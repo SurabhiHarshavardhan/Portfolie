@@ -25,23 +25,23 @@ export default function Navbar({ onOpenResume }) {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#050507]/80 backdrop-blur-xl border-b border-white/10 py-3 shadow-2xl shadow-black/80'
+          ? 'bg-[#030308]/80 backdrop-blur-2xl border-b border-purple-500/15 py-3 shadow-2xl shadow-black/80'
           : 'bg-transparent py-4 sm:py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* Brand Logo with Glossy Crimson Dot */}
+          {/* Brand Logo with Aurora Gradient Sheen */}
           <a href="#" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-xl glass-crimson flex items-center justify-center font-display font-black text-white text-base shadow-[0_0_15px_rgba(230,0,57,0.4)] group-hover:scale-105 transition-transform">
+            <div className="w-8 h-8 rounded-xl glass-aurora flex items-center justify-center font-display font-black text-white text-base shadow-[0_0_15px_rgba(139,92,246,0.4)] group-hover:scale-105 transition-transform">
               H
             </div>
             <div className="flex flex-col">
-              <span className="font-display font-extrabold text-white text-sm sm:text-base tracking-wider leading-none group-hover:text-[#ff3366] transition-colors">
+              <span className="font-display font-extrabold text-white text-sm sm:text-base tracking-wider leading-none group-hover:text-purple-300 transition-colors">
                 HARSHAVARDHAN
               </span>
-              <span className="text-[10px] text-white/50 tracking-widest uppercase mt-0.5 font-medium">
+              <span className="text-[10px] text-purple-300/60 tracking-widest uppercase mt-0.5 font-medium">
                 ECE Innovator
               </span>
             </div>
@@ -53,7 +53,7 @@ export default function Navbar({ onOpenResume }) {
               <a
                 key={link.name}
                 href={link.href}
-                className="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white/70 hover:text-white hover:bg-white/5 transition-all"
+                className="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-white/70 hover:text-white hover:bg-white/5 transition-all"
               >
                 {link.name}
               </a>
@@ -64,14 +64,14 @@ export default function Navbar({ onOpenResume }) {
           <div className="hidden sm:flex items-center gap-3">
             <button
               onClick={onOpenResume}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold text-white/80 bg-white/5 hover:bg-white/10 border border-white/10 transition-all"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold text-white/80 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-purple-400/40 transition-all"
             >
-              <FileText className="w-3.5 h-3.5 text-[#ff3366]" />
+              <FileText className="w-3.5 h-3.5 text-purple-400" />
               <span>Resume</span>
             </button>
             <a
               href="#contact"
-              className="btn-glossy flex items-center gap-1.5 px-4 py-1.5 rounded-xl text-xs font-bold text-white tracking-wide"
+              className="btn-aurora flex items-center gap-1.5 px-4 py-1.5 rounded-xl text-xs font-bold text-white tracking-wide"
             >
               <Send className="w-3.5 h-3.5" />
               <span>Contact</span>
@@ -82,7 +82,7 @@ export default function Navbar({ onOpenResume }) {
           <div className="flex md:hidden items-center gap-2">
             <button
               onClick={onOpenResume}
-              className="px-2.5 py-1 rounded-lg text-xs font-bold text-[#ff3366] bg-[#e60039]/15 border border-[#e60039]/30"
+              className="px-2.5 py-1 rounded-lg text-xs font-bold text-purple-300 bg-purple-500/15 border border-purple-500/30"
             >
               CV
             </button>
@@ -99,14 +99,14 @@ export default function Navbar({ onOpenResume }) {
 
         {/* Mobile dropdown */}
         {mobileMenuOpen && (
-          <div className="md:hidden mt-3 p-4 rounded-2xl glass-panel border border-white/15 shadow-2xl animate-in slide-in-from-top-2">
+          <div className="md:hidden mt-3 p-4 rounded-2xl glass-panel border border-purple-500/20 shadow-2xl animate-in slide-in-from-top-2">
             <div className="flex flex-col gap-2">
               {links.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2 rounded-xl text-sm font-semibold text-white/80 hover:text-white hover:bg-[#e60039]/15"
+                  className="px-3 py-2 rounded-xl text-sm font-semibold text-white/80 hover:text-white hover:bg-purple-500/15"
                 >
                   {link.name}
                 </a>
@@ -124,7 +124,7 @@ export default function Navbar({ onOpenResume }) {
                 <a
                   href="#contact"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex-1 py-2.5 rounded-xl btn-glossy text-xs font-bold text-white text-center"
+                  className="flex-1 py-2.5 rounded-xl btn-aurora text-xs font-bold text-white text-center"
                 >
                   Contact Me
                 </a>

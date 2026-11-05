@@ -26,13 +26,13 @@ export default function Contact({ onOpenResume }) {
   };
 
   return (
-    <section id="contact" className="py-16 sm:py-24 relative border-t border-white/5 bg-[#07070b]">
+    <section id="contact" className="py-16 sm:py-24 relative border-t border-purple-500/10 bg-[#05050c]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16 space-y-2">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#e60039]/10 border border-[#e60039]/30 text-xs font-bold text-[#ff3366] tracking-wider uppercase">
-            <Mail className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/25 text-xs font-bold text-purple-300 tracking-wider uppercase">
+            <Mail className="w-3.5 h-3.5 text-purple-400" />
             <span>Get In Touch</span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-white">
@@ -51,7 +51,7 @@ export default function Contact({ onOpenResume }) {
             
             {/* Email Card with 1-click copy */}
             <div className="glass-panel p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-white/10 space-y-3">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#ff3366] block">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-purple-300 block">
                 Direct Communication
               </span>
               <div className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10">
@@ -60,7 +60,7 @@ export default function Contact({ onOpenResume }) {
                 </span>
                 <button
                   onClick={handleCopy}
-                  className="p-2 rounded-lg bg-[#e60039]/20 hover:bg-[#e60039]/40 text-[#ff3366] transition-colors flex-shrink-0"
+                  className="p-2 rounded-lg bg-purple-500/20 hover:bg-purple-500/40 text-purple-300 transition-colors flex-shrink-0"
                   title="Copy email"
                 >
                   {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
@@ -80,14 +80,14 @@ export default function Contact({ onOpenResume }) {
               </span>
               <div className="space-y-2 text-xs">
                 <div className="flex items-start gap-2.5 p-3 rounded-xl bg-white/5">
-                  <MapPin className="w-4 h-4 text-[#ff3366] flex-shrink-0 mt-0.5" />
+                  <MapPin className="w-4 h-4 text-purple-400 flex-shrink-0 mt-0.5" />
                   <div>
                     <span className="font-bold text-white block">Saveetha School of Engineering</span>
                     <span className="text-white/50">Chennai, Tamil Nadu</span>
                   </div>
                 </div>
                 <div className="flex items-start gap-2.5 p-3 rounded-xl bg-white/5">
-                  <MapPin className="w-4 h-4 text-white/40 flex-shrink-0 mt-0.5" />
+                  <MapPin className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
                   <div>
                     <span className="font-bold text-white block">Home Base</span>
                     <span className="text-white/50">Tirupathi / Renigunta, Andhra Pradesh</span>
@@ -96,10 +96,10 @@ export default function Contact({ onOpenResume }) {
               </div>
             </div>
 
-            {/* Resume Callout */}
-            <div className="glass-crimson p-5 rounded-2xl sm:rounded-3xl border border-[#e60039]/40 space-y-2.5">
+            {/* Resume Callout with Aurora Sheen */}
+            <div className="glass-aurora p-5 rounded-2xl sm:rounded-3xl border border-purple-500/40 space-y-2.5">
               <span className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-                <FileDown className="w-4 h-4 text-[#ff3366]" />
+                <FileDown className="w-4 h-4 text-purple-300" />
                 Curriculum Vitae
               </span>
               <p className="text-xs text-white/70">
@@ -107,7 +107,7 @@ export default function Contact({ onOpenResume }) {
               </p>
               <button
                 onClick={onOpenResume}
-                className="w-full py-2.5 rounded-xl btn-glossy text-xs font-bold text-white text-center"
+                className="w-full py-2.5 rounded-xl btn-aurora text-xs font-bold text-white text-center"
               >
                 View & Print Official Resume
               </button>
@@ -119,7 +119,7 @@ export default function Contact({ onOpenResume }) {
           <div className="lg:col-span-7">
             <div className="glass-panel p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/10">
               <h3 className="text-lg font-bold text-white mb-1 flex items-center gap-2">
-                <MessageSquare className="w-4 h-4 text-[#ff3366]" />
+                <MessageSquare className="w-4 h-4 text-purple-400" />
                 Send a Message
               </h3>
               <p className="text-xs text-white/50 mb-6">
@@ -138,7 +138,7 @@ export default function Contact({ onOpenResume }) {
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
                       placeholder="e.g. Harsha"
-                      className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs sm:text-sm focus:border-[#ff3366] focus:outline-none transition-colors"
+                      className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs sm:text-sm focus:border-purple-400 focus:outline-none transition-colors"
                     />
                   </div>
                   <div>
@@ -151,7 +151,7 @@ export default function Contact({ onOpenResume }) {
                       value={form.email}
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
                       placeholder="e.g. name@gmail.com"
-                      className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs sm:text-sm focus:border-[#ff3366] focus:outline-none transition-colors"
+                      className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs sm:text-sm focus:border-purple-400 focus:outline-none transition-colors"
                     />
                   </div>
                 </div>
@@ -165,7 +165,7 @@ export default function Contact({ onOpenResume }) {
                     value={form.subject}
                     onChange={(e) => setForm({ ...form, subject: e.target.value })}
                     placeholder="e.g. ECE Role / Project Collaboration"
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs sm:text-sm focus:border-[#ff3366] focus:outline-none transition-colors"
+                    className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs sm:text-sm focus:border-purple-400 focus:outline-none transition-colors"
                   />
                 </div>
 
@@ -179,7 +179,7 @@ export default function Contact({ onOpenResume }) {
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                     placeholder="Write your note here..."
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs sm:text-sm focus:border-[#ff3366] focus:outline-none transition-colors resize-none"
+                    className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs sm:text-sm focus:border-purple-400 focus:outline-none transition-colors resize-none"
                   />
                 </div>
 
@@ -192,7 +192,7 @@ export default function Contact({ onOpenResume }) {
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="w-full py-3 rounded-xl btn-glossy text-xs sm:text-sm font-bold text-white flex items-center justify-center gap-2"
+                  className="w-full py-3 rounded-xl btn-aurora text-xs sm:text-sm font-bold text-white flex items-center justify-center gap-2"
                 >
                   <Send className="w-4 h-4" />
                   <span>{status === 'loading' ? 'Sending...' : 'Dispatch Message'}</span>
