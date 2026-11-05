@@ -6,23 +6,40 @@
   html {
     scroll-behavior: smooth;
     color-scheme: dark;
+    /* Hide scrollbars across all modern browsers */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
   }
 
-  /* Custom scrollbar */
+  /* Hide scrollbars completely for Chrome, Safari, Opera */
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 0px !important;
+    height: 0px !important;
+    display: none !important;
   }
-  ::-webkit-scrollbar-track {
-    background: #090d16;
+
+  body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
-  ::-webkit-scrollbar-thumb {
-    background: #1e293b;
-    border-radius: 4px;
-    border: 1px solid rgba(6, 182, 212, 0.2);
+
+  * {
+    /* Hidden scrollbar on all containers while keeping full scrollability */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #0891b2;
-  }
+}
+
+/* Custom utility for hidden scrollbars on specific containers */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }
 
 /* Cyber tech glowing effects */
@@ -31,47 +48,111 @@
 }
 
 .glow-box {
-  box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.2);
+  box-shadow: 0 0 30px -5px rgba(6, 182, 212, 0.25);
 }
 
 .glow-box:hover {
-  box-shadow: 0 0 35px 0px rgba(6, 182, 212, 0.4);
+  box-shadow: 0 0 45px 0px rgba(6, 182, 212, 0.45);
 }
 
 .glow-box-emerald:hover {
-  box-shadow: 0 0 35px 0px rgba(16, 185, 129, 0.4);
+  box-shadow: 0 0 40px 0px rgba(16, 185, 129, 0.45);
 }
 
 .circuit-grid {
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
 .circuit-dots {
-  background-image: radial-gradient(rgba(6, 182, 212, 0.15) 1px, transparent 0);
+  background-image: radial-gradient(rgba(6, 182, 212, 0.18) 1px, transparent 0);
   background-size: 24px 24px;
 }
 
 /* Glassmorphism */
 .glass-panel {
-  background: rgba(17, 24, 39, 0.7);
+  background: rgba(15, 23, 42, 0.72);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-panel-interactive {
-  background: rgba(17, 24, 39, 0.7);
+  background: rgba(15, 23, 42, 0.72);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-panel-interactive:hover {
-  background: rgba(22, 31, 54, 0.85);
-  border-color: rgba(6, 182, 212, 0.4);
-  transform: translateY(-2px);
+  background: rgba(22, 33, 62, 0.88);
+  border-color: rgba(6, 182, 212, 0.5);
+  transform: translateY(-3px);
 }
 
+/* Cyber Avatar & Hologram Animations */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-slow-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes float-subtle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    top: -100%;
+  }
+  100% {
+    top: 200%;
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+
+.animate-spin-reverse {
+  animation: spin-slow-reverse 22s linear infinite;
+}
+
+.animate-float-subtle {
+  animation: float-subtle 4s ease-in-out infinite;
+}
+
+.scanline-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanline-effect::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background: linear-gradient(to bottom, transparent, rgba(6, 182, 212, 0.15), transparent);
+  animation: scanline 4s linear infinite;
+  pointer-events: none;
+}

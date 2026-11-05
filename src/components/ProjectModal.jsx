@@ -47,7 +47,7 @@ export default function ProjectModal({ project, onClose }) {
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 sm:p-8 space-y-6 max-h-[75vh] overflow-y-auto">
+        <div className="p-5 sm:p-8 space-y-6 max-h-[75vh] overflow-y-auto no-scrollbar">
           
           {/* Metrics summary banner */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-950 p-4 rounded-xl border border-slate-800">

@@ -17,7 +17,7 @@ export default function App() {
   const [resumeOpen, setResumeOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#070b13] text-slate-100 relative selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div className="min-h-screen bg-[#070b13] text-slate-100 relative selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden no-scrollbar">
       {/* Dynamic Background Particle & Circuit Traces */}
       <BackgroundCanvas />
 

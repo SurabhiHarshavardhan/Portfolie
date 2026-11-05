@@ -59,7 +59,7 @@ export default function Projects({ onSelectProject }) {
   };
 
   return (
-    <section id="projects" className="py-20 relative bg-slate-950/70 border-t border-b border-slate-800">
+    <section id="projects" className="py-20 relative bg-slate-950/70 border-t border-b border-slate-800 no-scrollbar">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}

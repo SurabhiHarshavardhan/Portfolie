@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { X, Printer, Download, GraduationCap, Briefcase, Award, CheckCircle2, Languages, Cpu, Mail, MapPin } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import profilePhoto from '../image/Harshavardhan.jpeg';
 
 export default function ResumeModal({ isOpen, onClose }) {
   const { personal, education, projects, skillCategories, languages } = portfolioData;
@@ -58,29 +59,38 @@ export default function ResumeModal({ isOpen, onClose }) {
         </div>
 
         {/* Printable Resume Document Sheet */}
-        <div className="p-6 sm:p-10 max-h-[80vh] overflow-y-auto space-y-8 bg-slate-950 text-slate-200 font-sans print:p-0 print:max-h-none print:overflow-visible">
+        <div className="p-5 sm:p-10 max-h-[80vh] overflow-y-auto no-scrollbar space-y-8 bg-slate-950 text-slate-200 font-sans print:p-0 print:max-h-none print:overflow-visible">
           
-          {/* Header */}
-          <div className="border-b border-slate-800 pb-6 space-y-2 text-center sm:text-left">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              {personal.fullName}
-            </h1>
-            <p className="text-sm font-mono text-cyan-400 font-semibold">
-              Electronics and Communication Engineering (ECE) Graduate
-            </p>
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 text-xs font-mono text-slate-400 pt-1">
-              <span className="flex items-center gap-1">
-                <Mail className="w-3.5 h-3.5 text-cyan-400" />
-                {personal.email}
-              </span>
-              <span className="flex items-center gap-1">
-                <MapPin className="w-3.5 h-3.5 text-cyan-400" />
-                {personal.location}
-              </span>
-              <span className="flex items-center gap-1">
-                <GraduationCap className="w-3.5 h-3.5 text-cyan-400" />
-                CGPA: 7.38 / 10.0
-              </span>
+          {/* Header with Photo */}
+          <div className="border-b border-slate-800 pb-6 flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-cyan-400 flex-shrink-0 shadow-lg shadow-cyan-500/20">
+              <img
+                src={profilePhoto}
+                alt={personal.fullName}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="space-y-1.5 flex-1">
+              <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
+                {personal.fullName}
+              </h1>
+              <p className="text-xs sm:text-sm font-mono text-cyan-400 font-semibold">
+                Electronics and Communication Engineering (ECE) Graduate
+              </p>
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 text-xs font-mono text-slate-400 pt-1">
+                <span className="flex items-center gap-1">
+                  <Mail className="w-3.5 h-3.5 text-cyan-400" />
+                  {personal.email}
+                </span>
+                <span className="flex items-center gap-1">
+                  <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+                  {personal.location}
+                </span>
+                <span className="flex items-center gap-1">
+                  <GraduationCap className="w-3.5 h-3.5 text-cyan-400" />
+                  CGPA: 7.38 / 10.0
+                </span>
+              </div>
             </div>
           </div>
 

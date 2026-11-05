@@ -137,7 +137,7 @@ Focus: IoT, Embedded Hardware, Signal Processing, and Deep Learning.`
   };
 
   return (
-    <section id="terminal" className="py-20 relative bg-slate-950/80 border-t border-b border-slate-800">
+    <section id="terminal" className="py-20 relative bg-slate-950/80 border-t border-b border-slate-800 no-scrollbar">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
@@ -175,7 +175,7 @@ Focus: IoT, Embedded Hardware, Signal Processing, and Deep Learning.`
           </div>
 
           {/* Terminal Output Log Area */}
-          <div className="p-5 space-y-3 min-h-[300px] max-h-[420px] overflow-y-auto text-slate-300">
+          <div className="p-4 sm:p-5 space-y-3 min-h-[280px] max-h-[420px] overflow-y-auto no-scrollbar text-slate-300">
             {history.map((line, idx) => (
               <div key={idx} className="leading-relaxed">
                 {line.type === 'system' && (
@@ -202,15 +202,15 @@ Focus: IoT, Embedded Hardware, Signal Processing, and Deep Learning.`
           </div>
 
           {/* Quick command pills */}
-          <div className="px-5 py-2.5 bg-slate-900/60 border-t border-slate-800/80 flex flex-wrap items-center gap-2">
-            <span className="text-[11px] text-slate-500 uppercase tracking-wider font-semibold">
+          <div className="px-4 sm:px-5 py-2.5 bg-slate-900/60 border-t border-slate-800/80 flex items-center gap-2 overflow-x-auto no-scrollbar">
+            <span className="text-[11px] text-slate-500 uppercase tracking-wider font-semibold whitespace-nowrap">
               Suggestions:
             </span>
             {quickCommands.map((cmd) => (
               <button
                 key={cmd}
                 onClick={() => handleCommand(cmd)}
-                className="px-2.5 py-1 rounded-md bg-slate-800 hover:bg-cyan-500/20 text-cyan-300 border border-slate-700 hover:border-cyan-500/40 text-xs transition-all"
+                className="px-2.5 py-1 rounded-md bg-slate-800 hover:bg-cyan-500/20 text-cyan-300 border border-slate-700 hover:border-cyan-500/40 text-xs transition-all whitespace-nowrap flex-shrink-0"
               >
                 {cmd}
               </button>
