@@ -70,10 +70,6 @@
   box-shadow: 0 0 35px rgba(230, 0, 57, 0.35);
 }
 
-.crimson-glow-strong {
-  box-shadow: 0 0 50px rgba(230, 0, 57, 0.6);
-}
-
 /* Scroll reveal utility classes */
 .reveal, .reveal-left, .reveal-right, .reveal-scale {
   opacity: 0;
@@ -81,18 +77,10 @@
   will-change: opacity, transform;
 }
 
-.reveal {
-  transform: translateY(30px);
-}
-.reveal-left {
-  transform: translateX(-35px);
-}
-.reveal-right {
-  transform: translateX(35px);
-}
-.reveal-scale {
-  transform: scale(0.92);
-}
+.reveal { transform: translateY(30px); }
+.reveal-left { transform: translateX(-35px); }
+.reveal-right { transform: translateX(35px); }
+.reveal-scale { transform: scale(0.92); }
 
 .reveal.visible, .reveal-left.visible, .reveal-right.visible, .reveal-scale.visible {
   opacity: 1;
@@ -137,4 +125,53 @@
 
 .btn-glossy:hover::before {
   left: 100%;
+}
+
+/* ──── STRICT A4 PRINT STYLES (BLACK & WHITE) ──── */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm 14mm 12mm 14mm;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 10.5pt;
+    line-height: 1.35;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Hide everything on the page except the resume sheet */
+  body * {
+    visibility: hidden;
+  }
+
+  #a4-resume-sheet, #a4-resume-sheet * {
+    visibility: visible;
+  }
+
+  #a4-resume-sheet {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* Force pure black & white in print */
+  * {
+    color: #000000 !important;
+    background-color: transparent !important;
+    border-color: #000000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
 }
