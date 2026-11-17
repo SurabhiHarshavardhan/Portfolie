@@ -21,9 +21,9 @@ export const portfolioData = {
 
   stats: [
     { label: "B.Tech CGPA", value: "7.38 / 10", detail: "Saveetha School of Engg, Chennai" },
-    { label: "Major Innovations", value: "3+", detail: "Medical AI & Autonomous Robotics" },
+    { label: "Major Innovations", value: "4 Flagship", detail: "GenAI, Medical DL & Robotics" },
     { label: "Languages Known", value: "4", detail: "Telugu, Hindi, English, Tamil" },
-    { label: "Core Competency", value: "Hardware + AI", detail: "Embedded IoT & Deep Learning" }
+    { label: "Core Competency", value: "AI + Embedded", detail: "LLMs, Computer Vision & IoT" }
   ],
 
   education: [
@@ -75,43 +75,45 @@ export const portfolioData = {
 
   skillCategories: [
     {
-      id: "programming",
-      name: "Programming & Core",
+      id: "ai",
+      name: "AI & Machine Learning",
       skills: [
-        { name: "Python", level: 90, icon: "Code2", tags: ["Automation", "NumPy", "TensorFlow", "Scripting"] },
+        { name: "Groq API & LLaMA 3.3", level: 92, icon: "Brain", tags: ["LLM Integration", "Schema Validation", "Prompt Engineering"] },
+        { name: "Deep Convolutional Neural Networks (CNN)", level: 90, icon: "Brain", tags: ["Image Classification", "Feature Extraction", "Medical Diagnostics"] },
+        { name: "Recurrent Neural Networks (RNN)", level: 85, icon: "GitCommit", tags: ["Sequential Analysis", "Medical Time-Series", "Deep Learning"] },
+        { name: "Support Vector Machines (SVM)", level: 86, icon: "Gauge", tags: ["Kernel Methods", "Comparative ML", "Classification"] },
+        { name: "NLP & PDF Processing", level: 88, icon: "FileText", tags: ["PyPDF", "MCQ Generation", "Text Analytics"] },
+        { name: "Medical Image Processing", level: 88, icon: "Eye", tags: ["Microscopy", "Blood Smears", "Cell Segmentation"] }
+      ]
+    },
+    {
+      id: "programming",
+      name: "Programming & Frameworks",
+      skills: [
+        { name: "Python", level: 92, icon: "Code2", tags: ["Automation", "NumPy", "TensorFlow", "Scripting"] },
+        { name: "Streamlit", level: 90, icon: "Layout", tags: ["Interactive Portals", "Admin Dashboards", "UI/UX"] },
         { name: "C Programming", level: 85, icon: "Cpu", tags: ["Embedded C", "Pointers", "Memory Optimization"] },
-        { name: "Object Oriented Programming (OOP)", level: 88, icon: "Boxes", tags: ["Class Architecture", "Modularity", "Polymorphism"] },
-        { name: "Data Structures Basics", level: 78, icon: "Binary", tags: ["Arrays", "Stacks", "Queues", "Linked Lists"] }
+        { name: "Data Storage & Validation", level: 88, icon: "Database", tags: ["JSON Schema", "CSV Data", "RBAC Auth"] },
+        { name: "JavaScript & OOP", level: 80, icon: "Boxes", tags: ["Frontend Enhancements", "Modular Design", "Data Structures"] }
       ]
     },
     {
       id: "hardware",
-      name: "Embedded & Hardware",
+      name: "Robotics & Embedded Systems",
       skills: [
-        { name: "IoT (Internet of Things)", level: 88, icon: "Wifi", tags: ["MQTT", "HTTP", "Sensor Networks", "Cloud Telemetry"] },
-        { name: "Embedded Hardware & Systems", level: 85, icon: "CircuitBoard", tags: ["Microcontrollers", "Pin I/O", "Interfacing"] },
-        { name: "Digital Electronics", level: 86, icon: "Cpu", tags: ["Logic Gates", "Sequential Circuits", "Digital Design"] },
-        { name: "Signal Processing", level: 80, icon: "Activity", tags: ["Filters", "Fourier Transform", "Waveform Analysis"] },
-        { name: "Sensors & Actuators Interfacing", level: 85, icon: "Radio", tags: ["Ultrasonic", "IR", "Motors", "Camera Modules"] }
-      ]
-    },
-    {
-      id: "ai",
-      name: "AI & Machine Learning",
-      skills: [
-        { name: "Deep Convolutional Neural Networks (CNN)", level: 88, icon: "Brain", tags: ["Image Classification", "Feature Extraction", "Medical Diagnostics"] },
-        { name: "Recurrent Neural Networks (RNN)", level: 82, icon: "GitCommit", tags: ["Time-Series Data", "Sequential Analysis", "Deep Learning"] },
-        { name: "Support Vector Machines (SVM)", level: 84, icon: "Gauge", tags: ["Kernel Methods", "Hyperplane Optimization", "Comparative ML"] },
-        { name: "Computer Vision & Medical Imaging", level: 85, icon: "Eye", tags: ["Blood Smear Analysis", "Cell Segmentation", "Parasite Detection"] }
+        { name: "Raspberry Pi 5 & Microcontrollers", level: 90, icon: "CircuitBoard", tags: ["SBC Computing", "GPIO", "Embedded Control"] },
+        { name: "Sensors & Actuators", level: 88, icon: "Radio", tags: ["Ultrasonic", "IR Sensors", "Gyroscope", "Motor Drivers"] },
+        { name: "IoT (Internet of Things)", level: 86, icon: "Wifi", tags: ["Telemetry", "Wireless Control", "Edge Systems"] },
+        { name: "Digital Electronics & Signals", level: 85, icon: "Activity", tags: ["Logic Gates", "Sequential Circuits", "Signal Processing"] }
       ]
     },
     {
       id: "softskills",
-      name: "Soft Skills",
+      name: "Professional & Soft Skills",
       skills: [
         { name: "Leadership", level: 90, icon: "Award", tags: ["Team Direction", "Project Ownership", "Initiative"] },
-        { name: "Problem Solving", level: 92, icon: "Lightbulb", tags: ["Root-cause Analysis", "Hardware Debugging", "Algorithm Design"] },
-        { name: "Communication", level: 88, icon: "MessageSquare", tags: ["Technical Presentations", "Documentation", "Team Sync"] },
+        { name: "Problem Solving", level: 94, icon: "Lightbulb", tags: ["Root-cause Analysis", "Hardware Debugging", "Algorithm Design"] },
+        { name: "Technical Communication", level: 88, icon: "MessageSquare", tags: ["Presentations", "Documentation", "Team Sync"] },
         { name: "Teamwork & Collaboration", level: 90, icon: "Users", tags: ["Peer Reviews", "Cross-functional Projects"] },
         { name: "Time Management", level: 86, icon: "Clock", tags: ["Sprint Planning", "Milestone Tracking", "Delivery"] }
       ]
@@ -127,65 +129,94 @@ export const portfolioData = {
 
   projects: [
     {
-      id: "malaria-cnn-svm",
-      title: "Malaria Parasite Categorization: CNN vs. SVM",
+      id: "cognita-ai",
+      title: "COGNITA AI – Intelligent Assessment & AI Quiz Portal",
       shortDescription:
-        "Machine learning diagnostic framework to classify malaria parasites from microscopic blood cell images using deep CNN architectures compared against SVM models.",
-      category: "Medical AI & Computer Vision",
-      accent: "cyan",
+        "Full-stack, role-based examination portal using Python and Streamlit, integrated with the Groq LLaMA-3.3-70B AI model for automated PDF-to-MCQ generation and real-time candidate evaluation.",
+      category: "Generative AI & EdTech Systems",
+      accent: "slate",
       metrics: {
-        accuracy: "96.4%",
-        dataset: "Microscopic Blood Smear Images",
-        comparison: "CNN (96.4%) vs SVM (89.1%)",
-        inferenceTime: "42ms / frame"
+        aiModel: "Groq LLaMA-3.3-70B",
+        architecture: "Full-Stack Role-Based Portal",
+        validation: "Strict JSON Schema",
+        modules: "Teacher Studio, Candidate Portal, Admin Dashboard"
       },
-      tags: ["Deep Learning", "CNN", "SVM", "Python", "Medical Imaging", "Parasite Classification", "OpenCV"],
+      tags: ["Python", "Streamlit", "Groq API", "LLaMA 3.3", "NLP", "PyPDF", "JSON", "CSV", "JavaScript"],
       overview:
-        "Developed a novel machine learning approach to categorize malaria parasites from microscopic blood cell images. The research evaluated both Deep Convolutional Neural Networks (CNN) and Support Vector Machines (SVM), establishing empirical performance benchmarks in diagnostic accuracy, sensitivity, and computational overhead for automated clinical screening.",
+        "Developed a full-stack, role-based examination portal using Python and Streamlit, integrated with the Groq LLaMA-3.3-70B AI model. Implemented an NLP pipeline to extract content from lecture PDFs, generate MCQs, and validate questions using JSON schema validation. Developed Teacher Studio, Candidate Portal, Admin Dashboard, automated evaluation, countdown timer, and performance analytics with JSON and CSV-based storage.",
       keyFeatures: [
-        "End-to-end data preprocessing pipeline for microscopic blood smear cell segmentation and normalization.",
-        "Deep Convolutional Neural Network architecture with convolutional layers, pooling, dropout, and Softmax classification.",
-        "Comparative baseline model built using Support Vector Machines with RBF kernel and handcrafted texture/color features.",
-        "Demonstrated a +7.3% accuracy boost and superior feature invariance using CNN compared to traditional SVM classifiers.",
-        "High sensitivity rate (97.1%) in identifying infected erythrocytes, crucial for reducing false negative medical diagnoses."
+        "Full-stack, role-based examination portal using Python and Streamlit, integrated with the Groq LLaMA-3.3-70B AI model.",
+        "Implemented an NLP pipeline to extract content from lecture PDFs, generate MCQs, and validate questions using JSON schema validation.",
+        "Developed Teacher Studio, Candidate Portal, Admin Dashboard, automated evaluation, countdown timer, and performance analytics.",
+        "Implemented JSON and CSV-based data storage with role-based authentication and classroom management."
       ],
       techSpecs: [
-        { label: "Core Model", value: "Deep CNN (Custom Conv-Pool-Dense Architecture)" },
-        { label: "Comparison Model", value: "SVM (Radial Basis Function Kernel)" },
-        { label: "Languages & Frameworks", value: "Python, TensorFlow, Scikit-learn, NumPy, Matplotlib" },
-        { label: "Input Modality", value: "Microscopic Red Blood Cell (RBC) Slides" },
-        { label: "Diagnostic Target", value: "Plasmodium Falciparum / Vivax Infection vs Uninfected" }
+        { label: "AI Model & Engine", value: "Groq API with LLaMA-3.3-70B High-Speed Inference" },
+        { label: "Framework & Frontend", value: "Python, Streamlit, Custom Component Styling, JavaScript" },
+        { label: "NLP & Extraction", value: "PyPDF Document Parsing & Tokenization Pipeline" },
+        { label: "Data Integrity & Schema", value: "Strict JSON Schema Validation & CSV Performance Logs" },
+        { label: "Portals & Modules", value: "Teacher Studio, Candidate Portal, Admin Dashboard, Analytics" }
+      ],
+      demoType: "cognita-portal"
+    },
+    {
+      id: "malaria-cnn-svm",
+      title: "A Novel Strategy in Malaria Parasite Categorization Using CNN Compared with SVM",
+      shortDescription:
+        "Machine learning diagnostic framework to classify malaria parasites from microscopic blood cell images, comparing deep CNN architectures against SVM models.",
+      category: "Medical AI & Computer Vision",
+      accent: "slate",
+      metrics: {
+        accuracy: "96.4% CNN Accuracy",
+        dataset: "Microscopic Blood Cell Images",
+        comparison: "CNN vs SVM Benchmark",
+        inferenceTime: "42ms / frame"
+      },
+      tags: ["Python", "Machine Learning", "Deep Learning", "CNN", "SVM", "Image Processing"],
+      overview:
+        "Developed a machine learning approach to classify malaria parasites using microscopic blood cell images. Compared CNN and SVM models to evaluate classification accuracy and performance in medical image analysis.",
+      keyFeatures: [
+        "Developed a machine learning approach to classify malaria parasites using microscopic blood cell images.",
+        "Compared CNN and SVM models to evaluate classification accuracy and performance in medical image analysis.",
+        "Constructed deep CNN layers with feature extraction filters, max pooling, and dropout to prevent overfitting.",
+        "Implemented Support Vector Machine with kernel comparison as a benchmark baseline."
+      ],
+      techSpecs: [
+        { label: "Core Model", value: "Deep Convolutional Neural Network (CNN)" },
+        { label: "Comparison Model", value: "Support Vector Machine (SVM)" },
+        { label: "Technologies", value: "Python, Machine Learning, Deep Learning, CNN, SVM, Image Processing" },
+        { label: "Input Modality", value: "Microscopic Blood Cell Images" },
+        { label: "Target", value: "Malaria Parasite Categorization (Infected vs. Healthy)" }
       ],
       demoType: "cnn-vs-svm"
     },
     {
       id: "typhoid-rnn-cnn",
-      title: "Comparative Analysis of Typhoid Parasite Detection: RNN vs. CNN",
+      title: "Comparative Analysis of Typhoid Detection: RNN vs. CNN",
       shortDescription:
-        "Deep learning research evaluating Recurrent Neural Networks (RNN) against Convolutional Neural Networks (CNN) to enhance medical diagnostic accuracy for typhoid detection.",
-      category: "Deep Learning & Healthcare Analytics",
-      accent: "emerald",
+        "Deep learning research exploring medical data analysis for typhoid detection by comparing Recurrent Neural Networks (RNN) and Convolutional Neural Networks (CNN).",
+      category: "Deep Learning & Healthcare Diagnostics",
+      accent: "slate",
       metrics: {
-        accuracy: "95.1%",
-        dataset: "Clinical Diagnostic Records & Imaging",
-        comparison: "CNN (Spatial) vs RNN (Sequential)",
-        latency: "Low Latency Screening"
+        accuracy: "95.1% Peak Accuracy",
+        dataModality: "Medical Data & Diagnostics",
+        comparison: "RNN vs. CNN Performance",
+        latency: "Optimized Screening"
       },
-      tags: ["Deep Learning", "RNN", "CNN", "Python", "Healthcare Diagnostics", "Sequential Analysis"],
+      tags: ["Python", "Deep Learning", "RNN", "CNN", "Medical Data Analysis"],
       overview:
-        "Explored deep learning architectures for typhoid-related medical data analysis by contrasting Recurrent Neural Networks (RNN) and Deep Convolutional Neural Networks (CNN). The project investigated how sequential patient temporal records and morphological diagnostic biomarkers are processed by different neural network topologies.",
+        "Explored deep learning techniques for analyzing typhoid-related medical data. Compared Recurrent Neural Networks (RNN) and Convolutional Neural Networks (CNN) to evaluate their performance in supporting disease detection and medical diagnostics.",
       keyFeatures: [
-        "Structured comparative evaluation framework examining spatial feature extraction (CNN) vs. sequential temporal dynamics (RNN).",
-        "Synthesized and preprocessed patient biomarker trends and diagnostic imagery for model training and validation.",
-        "Analyzed gradient vanishing mitigations and evaluated precision, recall, F1-score, and ROC-AUC curves across models.",
-        "Provided key insights into how hybrid CNN-RNN pipelines can be formulated for comprehensive multi-modal disease diagnostics.",
-        "Designed to assist clinical practitioners in early-stage typhoid diagnosis, reducing diagnostic turnaround time."
+        "Explored deep learning techniques for analyzing typhoid-related medical data.",
+        "Compared Recurrent Neural Networks (RNN) and Convolutional Neural Networks (CNN) to evaluate their performance in supporting disease detection and medical diagnostics.",
+        "Evaluated spatial pattern recognition in CNN against sequential feature extraction in RNN.",
+        "Derived comprehensive performance metrics including accuracy, precision, recall, and ROC curves."
       ],
       techSpecs: [
-        { label: "Deep Models", value: "CNN (Spatial Extraction) vs RNN (Temporal Sequence)" },
-        { label: "Platform", value: "Python Deep Learning Stack (TensorFlow / Keras)" },
-        { label: "Performance Metric", value: "Accuracy, Precision, Recall, Confusion Matrix" },
-        { label: "Clinical Goal", value: "Early & Reliable Typhoid Parasite Detection" }
+        { label: "Deep Architectures", value: "Recurrent Neural Networks (RNN) vs. Convolutional Neural Networks (CNN)" },
+        { label: "Application Domain", value: "Typhoid Detection & Medical Diagnostics" },
+        { label: "Technologies", value: "Python, Deep Learning, RNN, CNN, Medical Data Analysis" },
+        { label: "Objective", value: "Diagnostic Support for Clinical Decision-Making" }
       ],
       demoType: "rnn-vs-cnn"
     },
@@ -193,31 +224,30 @@ export const portfolioData = {
       id: "tennis-ball-robot",
       title: "Tennis Ball Collector Robot Integrated with AI",
       shortDescription:
-        "Autonomous AI-powered mobile robotic rover engineered to detect, navigate toward, and collect tennis balls across courts using sensor fusion and embedded control.",
-      category: "Robotics, Embedded IoT & AI",
-      accent: "amber",
+        "AI-integrated autonomous robotic system built on Raspberry Pi 5 to automatically detect, collect, and gather tennis balls using sensor fusion and intelligent motor control.",
+      category: "Robotics, Embedded Systems & AI",
+      accent: "slate",
       metrics: {
-        collectionRate: "92% Success Rate",
-        hardware: "Microcontroller + Sensors",
-        mode: "Autonomous Navigation & Manual Override",
-        payload: "Up to 15 Tennis Balls"
+        hardware: "Raspberry Pi 5 + Motor Driver",
+        sensorSuite: "Ultrasonic, IR & Gyroscope",
+        efficiency: "High-Efficiency Auto Sweep",
+        collectionMode: "Autonomous AI Tracking"
       },
-      tags: ["Robotics", "Embedded Systems", "IoT", "C / C++", "Python", "Sensors", "Motor Drivers", "Autonomous"],
+      tags: ["Python", "Artificial Intelligence", "Raspberry Pi 5", "Ultrasonic Sensor", "IR Sensor", "Gyroscope", "Motor Driver"],
       overview:
-        "Designed and engineered an AI-integrated robotic rover to automatically detect, collect, and gather tennis balls on courts. The system unifies computer vision/sensor feedback, microcontroller firmware, and a mechanical intake roller mechanism to optimize ball recovery and eliminate strenuous manual collection during training sessions.",
+        "Designed an AI-integrated robotic system to automatically detect, collect, and gather tennis balls. Integrated sensors, embedded systems, and intelligent control mechanisms to improve collection efficiency and reduce manual effort.",
       keyFeatures: [
-        "Integrated sensor suite combining ultrasonic distance sensors, infrared boundary detectors, and visual ball detection.",
-        "Embedded microcontroller firmware written in C/C++ handling PWM motor speed control, differential steering, and safety halts.",
-        "Custom mechanical collection mechanism using a rotating roller and intake hopper to sweep and store balls automatically.",
-        "AI-guided pathfinding algorithm to track the nearest detected tennis ball while avoiding court boundaries and obstacles.",
-        "IoT telemetry dashboard interface for real-time battery status, collected ball counter, and system diagnostic logs."
+        "Designed an AI-integrated robotic system to automatically detect, collect, and gather tennis balls.",
+        "Integrated sensors, embedded systems, and intelligent control mechanisms to improve collection efficiency and reduce manual effort.",
+        "Leveraged Raspberry Pi 5 as the central computing unit with Python-based intelligent decision control.",
+        "Combined ultrasonic distance sensors, infrared boundary sensors, and gyroscope for precision localization and obstacle avoidance."
       ],
       techSpecs: [
-        { label: "Controller", value: "Microcontroller (Embedded C/C++) with Motor Shields" },
-        { label: "Sensors", value: "Ultrasonic HC-SR04, IR Proximity, Optical Vision Sensor" },
-        { label: "Actuation", value: "High-Torque DC Geared Motors + Collector Servo" },
-        { label: "Power System", value: "Rechargeable Li-Ion Battery Pack with Power Management" },
-        { label: "AI Module", value: "Python-based Color & Circular Hough / YOLO Ball Detection" }
+        { label: "Central SBC", value: "Raspberry Pi 5" },
+        { label: "Sensor Array", value: "Ultrasonic Sensor, IR Sensor, Gyroscope" },
+        { label: "Actuation & Drive", value: "High-Torque Motor Driver & Collector Mechanism" },
+        { label: "Software & Intelligence", value: "Python, Artificial Intelligence, Real-Time Sensor Fusion" },
+        { label: "Core Benefit", value: "Automated Gathering & Significant Reduction in Manual Effort" }
       ],
       demoType: "robotics-telemetry"
     }

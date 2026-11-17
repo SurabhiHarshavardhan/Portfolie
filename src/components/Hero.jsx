@@ -122,12 +122,12 @@ export default function Hero() {
 
             {/* Bio summary paragraph */}
             <p className="text-slate-600 text-xs sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0 font-medium">
-              Electronics and Communication Engineering graduate with strong fundamentals in digital electronics, embedded systems, and IoT. Experienced in building machine learning healthcare diagnostics (CNN & RNN) and autonomous robotic systems.
+              Electronics and Communication Engineering graduate experienced in full-stack GenAI assessment portals (Groq LLaMA-3.3-70B), medical deep learning diagnostics (CNN & RNN), and autonomous robotics with Raspberry Pi 5.
             </p>
 
             {/* Quick Skills Badges */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-1.5 sm:gap-2 pt-1">
-              {['Python', 'Embedded C', 'IoT Architecture', 'Deep CNN & RNN', 'SVM', 'Robotics'].map((badge) => (
+              {['Python', 'Streamlit', 'Groq LLaMA 3.3', 'Raspberry Pi 5', 'Deep CNN & RNN', 'Embedded C'].map((badge) => (
                 <span
                   key={badge}
                   className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 hover:border-slate-400 text-[11px] sm:text-xs font-semibold text-slate-700 shadow-sm transition-colors"
