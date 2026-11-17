@@ -40,23 +40,15 @@ export default function Hero() {
         {/* Layout: Image on LEFT (Col 1-5), Content on RIGHT (Col 6-12) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-14 items-center">
           
-          {/* ──── LEFT SIDE: PROFILE PHOTO (CLEAN & FRAMELESS) ──── */}
+          {/* ──── LEFT SIDE: TRANSPARENT CUTOUT PROFILE PHOTO (NO BOX / NO FRAME) ──── */}
           <div className="lg:col-span-5 flex justify-center lg:justify-start order-1">
-            <div className="relative group w-full max-w-[280px] sm:max-w-[340px] md:max-w-[380px]">
-              
-              {/* Subtle Ambient Shadow Glow */}
-              <div className="absolute -inset-2 bg-gradient-to-tr from-slate-200/60 via-slate-100/50 to-slate-300/40 rounded-3xl blur-xl opacity-60 group-hover:opacity-90 transition duration-500 pointer-events-none" />
-              
-              {/* Clean Frameless Photo */}
-              <div className="relative aspect-[3/4] w-full rounded-3xl overflow-hidden shadow-2xl">
-                <img
-                  src={profilePhoto}
-                  alt="Surabhi Harshavardhan"
-                  className="w-full h-full object-cover object-top filter contrast-[1.03] group-hover:scale-105 transition-transform duration-700 ease-out"
-                  loading="eager"
-                />
-              </div>
-
+            <div className="relative w-full max-w-[300px] sm:max-w-[360px] md:max-w-[410px] flex justify-center items-end">
+              <img
+                src={profilePhoto}
+                alt="Surabhi Harshavardhan"
+                className="w-full h-auto object-contain select-none drop-shadow-[0_16px_28px_rgba(15,23,42,0.10)] hover:scale-[1.02] transition-transform duration-500 ease-out"
+                loading="eager"
+              />
             </div>
           </div>
 
@@ -123,7 +115,7 @@ export default function Hero() {
               </div>
               <div className="glass-card p-2.5 sm:p-3 rounded-xl">
                 <div className="text-base sm:text-xl font-display font-black text-slate-800">10+</div>
-                <div className="text-[10px] sm:text-[11px] text-slate-500 font-semibold">Tech Stacks</div>
+                <div className="text-[10px] sm:text-[11px] text-slate-500 foo istead as gradient glow with mact ui nt-semibold">Tech Stacks</div>
               </div>
               <div className="glass-card p-2.5 sm:p-3 rounded-xl">
                 <div className="text-base sm:text-xl font-display font-black text-slate-800">4</div>
