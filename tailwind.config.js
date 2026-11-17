@@ -8,13 +8,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        aura: {
-          violet: '#8b5cf6',
-          indigo: '#6366f1',
-          rose: '#f43f5e',
-          cyan: '#06b6d4',
-          dark: '#030308',
-          card: '#0a0a14',
+        pearl: {
+          50: '#ffffff',
+          100: '#f8fafc',
+          200: '#f1f5f9',
+          300: '#e2e8f0',
+          400: '#cbd5e1',
+          500: '#94a3b8',
+          600: '#64748b',
+          700: '#475569',
+          800: '#334155',
+          900: '#1e293b',
+          950: '#0f172a',
         }
       },
       fontFamily: {
@@ -24,21 +29,16 @@ export default {
       animation: {
         'float-slow': 'floatSlow 6s ease-in-out infinite',
         'pulse-glow': 'pulseGlow 4s ease-in-out infinite',
-        'gradient-mesh': 'gradientMesh 12s ease infinite alternate',
         'spin-slow': 'spin 20s linear infinite',
       },
       keyframes: {
         floatSlow: {
           '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-12px)' },
+          '50%': { transform: 'translateY(-10px)' },
         },
         pulseGlow: {
           '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
-          '50%': { opacity: '0.8', transform: 'scale(1.08)' },
-        },
-        gradientMesh: {
-          '0%': { backgroundPosition: '0% 50%' },
-          '100%': { backgroundPosition: '100% 50%' },
+          '50%': { opacity: '0.7', transform: 'scale(1.06)' },
         }
       }
     },
