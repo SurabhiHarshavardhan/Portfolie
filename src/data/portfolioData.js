@@ -20,7 +20,7 @@ export const portfolioData = {
   },
 
   stats: [
-    { label: "B.Tech CGPA", value: "7.38 / 10", detail: "Saveetha School of Engg, Chennai" },
+    { label: "Engineering Degree", value: "B.Tech ECE", detail: "Saveetha School of Engg" },
     { label: "Major Innovations", value: "4 Flagship", detail: "GenAI, Medical DL & Robotics" },
     { label: "Languages Known", value: "4", detail: "Telugu, Hindi, English, Tamil" },
     { label: "Core Competency", value: "AI + Embedded", detail: "LLMs, Computer Vision & IoT" }

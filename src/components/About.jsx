@@ -60,16 +60,16 @@ export default function About() {
                   <span className="text-slate-700 font-medium">Saveetha School of Engg (2022–2026)</span>
                 </div>
                 <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white border border-slate-200 shadow-sm">
-                  <MapPin className="w-4 h-4 text-slate-700 flex-shrink-0" />
-                  <span className="text-slate-700 font-medium">Chennai, TN & Tirupathi, AP</span>
+                  <CheckCircle2 className="w-4 h-4 text-slate-700 flex-shrink-0" />
+                  <span className="text-slate-700 font-medium">B.Tech Electronics & Comm. Engg</span>
                 </div>
                 <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white border border-slate-200 shadow-sm">
                   <Zap className="w-4 h-4 text-slate-700 flex-shrink-0" />
                   <span className="text-slate-700 font-medium">IoT & Embedded Hardware</span>
                 </div>
                 <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white border border-slate-200 shadow-sm">
-                  <CheckCircle2 className="w-4 h-4 text-slate-900 flex-shrink-0" />
-                  <span className="text-slate-900 font-bold">B.Tech CGPA: 7.38 / 10.0</span>
+                  <Brain className="w-4 h-4 text-slate-900 flex-shrink-0" />
+                  <span className="text-slate-900 font-bold">GenAI, Deep Learning & Robotics</span>
                 </div>
               </div>
             </div>
